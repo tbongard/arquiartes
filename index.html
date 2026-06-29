@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ARQUIARTES — Arquitetura & Paisagismo</title>
+  <meta name="description" content="ARQUIARTES — escritório de arquitetura e paisagismo. Projetos personalizados que unem natureza, sofisticação e arquitetura contemporânea." />
+  <meta name="theme-color" content="#2f3d33" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="ARQUIARTES — Arquitetura & Paisagismo" />
+  <meta property="og:description" content="Projetos personalizados que unem natureza, sofisticação e arquitetura contemporânea." />
+  <meta property="og:type" content="website" />
+
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ====================== CABEÇALHO / NAVEGAÇÃO ====================== -->
+  <header class="site-header" id="header">
+    <div class="container header__inner">
+      <a href="#hero" class="brand" aria-label="ARQUIARTES — início">
+        <img src="assets/img/logo-mark.svg" alt="" class="brand__mark" aria-hidden="true" />
+        <span class="brand__words">
+          <span class="brand__name">ARQUIARTES</span>
+          <span class="brand__tagline">arquitetura &amp; paisagismo</span>
+        </span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Navegação principal">
+        <a href="#sobre" class="nav__link">Sobre</a>
+        <a href="#servicos" class="nav__link">Serviços</a>
+        <a href="#portfolio" class="nav__link">Projetos</a>
+        <a href="#diferenciais" class="nav__link">Diferenciais</a>
+        <a href="#depoimentos" class="nav__link">Depoimentos</a>
+        <a href="#contato" class="nav__link nav__link--cta">Contato</a>
+      </nav>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ====================== HERO ====================== -->
+    <section class="hero" id="hero">
+      <div class="hero__media" aria-hidden="true">
+        <div class="hero__overlay"></div>
+      </div>
+
+      <div class="container hero__grid">
+        <div class="hero__photo reveal">
+          <img src="assets/img/laisa.jpg" alt="Laísa Wermelinger — ARQUIARTES Arquitetura &amp; Paisagismo" data-content-src="hero.photo" />
+          <span class="hero__photo-tag">
+            <strong data-content="hero.name">Laísa Wermelinger</strong>
+            <em data-content="hero.role">Arquitetura &amp; Paisagismo</em>
+          </span>
+        </div>
+
+        <div class="hero__content reveal">
+          <p class="eyebrow eyebrow--light" data-content="hero.eyebrow">Arquitetura &amp; Paisagismo</p>
+          <h1 class="hero__title" data-content-html="hero.title">
+            Espaços que respiram<br />arte, natureza e propósito.
+          </h1>
+          <p class="hero__text" data-content="hero.text">
+            Criamos projetos autorais de arquitetura e paisagismo que traduzem a
+            essência de quem vive cada espaço — com equilíbrio entre design
+            contemporâneo, natureza e sofisticação atemporal.
+          </p>
+          <div class="hero__actions">
+            <a href="#contato" class="btn btn--primary" data-content="hero.btnPrimary">Solicitar orçamento</a>
+            <a href="#portfolio" class="btn btn--ghost" data-content="hero.btnSecondary">Ver projetos</a>
+          </div>
+        </div>
+      </div>
+
+      <a href="#sobre" class="hero__scroll" aria-label="Rolar para baixo">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- ====================== SOBRE ====================== -->
+    <section class="section sobre" id="sobre">
+      <div class="container grid grid--2">
+        <div class="sobre__image reveal">
+          <div class="image-placeholder image-placeholder--tall" data-label="Imagem · Sobre" data-content-bg="sobre.imagem"></div>
+          <span class="sobre__badge">Desde<br /><strong data-content="sobre.ano">2023</strong></span>
+        </div>
+
+        <div class="sobre__text reveal">
+          <p class="eyebrow" data-content="sobre.eyebrow">Sobre a ARQUIARTES</p>
+          <h2 class="section__title" data-content="sobre.title">Arquitetura que nasce do diálogo entre pessoas e natureza.</h2>
+          <p data-content="sobre.p1">
+            A ARQUIARTES é um escritório dedicado a transformar ideias em
+            ambientes que inspiram. Unimos arquitetura contemporânea e
+            paisagismo autoral para criar espaços únicos, funcionais e
+            profundamente conectados ao seu entorno.
+          </p>
+          <p data-content="sobre.p2">
+            Cada projeto é conduzido com escuta atenta, cuidado com os detalhes
+            e compromisso com a excelência — do primeiro esboço à entrega final.
+            Acreditamos que bons espaços não apenas abrigam: eles acolhem,
+            emocionam e perduram.
+          </p>
+          <ul class="sobre__list">
+            <li data-content="sobre.itens.0">Projetos exclusivos e personalizados</li>
+            <li data-content="sobre.itens.1">Integração entre interior, arquitetura e paisagem</li>
+            <li data-content="sobre.itens.2">Acompanhamento dedicado em todas as etapas</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== SERVIÇOS ====================== -->
+    <section class="section servicos" id="servicos">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow" data-content="servicos.eyebrow">O que fazemos</p>
+          <h2 class="section__title" data-content="servicos.title">Serviços pensados para o seu modo de viver.</h2>
+          <p class="section__lead" data-content="servicos.lead">
+            Soluções completas de arquitetura e paisagismo, desenvolvidas sob
+            medida para residências, espaços corporativos e ambientes externos.
+          </p>
+        </div>
+
+        <div class="grid grid--3 servicos__grid">
+          <article class="card reveal">
+            <span class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M6 42V20L24 6l18 14v22"/><path d="M18 42V28h12v14"/></svg>
+            </span>
+            <h3 class="card__title" data-content="servicos.itens.0.titulo">Projetos de Arquitetura</h3>
+            <p data-content="servicos.itens.0.descricao">Concepção e desenvolvimento de projetos residenciais e comerciais, do partido arquitetônico ao detalhamento executivo.</p>
+          </article>
+
+          <article class="card reveal">
+            <span class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M24 42c10-6 14-14 14-22a14 14 0 0 0-28 0c0 8 4 16 14 22Z"/><path d="M24 20v22M24 26l6-6M24 30l-6-6"/></svg>
+            </span>
+            <h3 class="card__title" data-content="servicos.itens.1.titulo">Paisagismo</h3>
+            <p data-content="servicos.itens.1.descricao">Projetos paisagísticos que valorizam a natureza, criando jardins, terraços e áreas externas vivas e harmoniosas.</p>
+          </article>
+
+          <article class="card reveal">
+            <span class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="8" y="8" width="32" height="32" rx="2"/><path d="M8 20h32M20 8v32"/></svg>
+            </span>
+            <h3 class="card__title" data-content="servicos.itens.2.titulo">Interiores</h3>
+            <p data-content="servicos.itens.2.descricao">Ambientes internos que equilibram estética, conforto e funcionalidade, traduzindo a identidade de quem os habita.</p>
+          </article>
+
+          <article class="card reveal">
+            <span class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M6 38h36M10 38V18l14-10 14 10v20"/><path d="M20 38V26h8v12"/></svg>
+            </span>
+            <h3 class="card__title" data-content="servicos.itens.3.titulo">Consultoria &amp; Estudos</h3>
+            <p data-content="servicos.itens.3.descricao">Análises de viabilidade, estudos preliminares e consultoria especializada para orientar decisões com segurança.</p>
+          </article>
+
+          <article class="card reveal">
+            <span class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="24" cy="24" r="16"/><path d="M24 8v8M24 32v8M8 24h8M32 24h8"/></svg>
+            </span>
+            <h3 class="card__title" data-content="servicos.itens.4.titulo">Acompanhamento de Obra</h3>
+            <p data-content="servicos.itens.4.descricao">Gestão e supervisão da execução para garantir que o projeto se concretize com a qualidade idealizada.</p>
+          </article>
+
+          <article class="card reveal">
+            <span class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M24 6c8 6 12 12 12 20a12 12 0 0 1-24 0c0-8 4-14 12-20Z"/><circle cx="24" cy="26" r="5"/></svg>
+            </span>
+            <h3 class="card__title" data-content="servicos.itens.5.titulo">Projetos Sustentáveis</h3>
+            <p data-content="servicos.itens.5.descricao">Soluções que aliam beleza e responsabilidade ambiental, com eficiência, conforto e respeito ao entorno.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== PORTFÓLIO ====================== -->
+    <section class="section portfolio" id="portfolio">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow" data-content="portfolio.eyebrow">Projetos selecionados</p>
+          <h2 class="section__title" data-content="portfolio.title">Um portfólio que fala por meio dos detalhes.</h2>
+          <p class="section__lead" data-content="portfolio.lead">
+            Uma seleção de obras que revelam nossa forma de pensar o espaço.
+            Em breve, novos projetos reais ocuparão este espaço.
+          </p>
+        </div>
+
+        <div class="portfolio__grid">
+          <figure class="project reveal">
+            <div class="image-placeholder" data-label="Projeto 01" data-content-bg="portfolio.itens.0.imagem"></div>
+            <figcaption class="project__caption">
+              <span class="project__cat" data-content="portfolio.itens.0.categoria">Residencial</span>
+              <h3 class="project__title" data-content="portfolio.itens.0.titulo">Residência Jardim das Acácias</h3>
+            </figcaption>
+          </figure>
+
+          <figure class="project project--wide reveal">
+            <div class="image-placeholder" data-label="Projeto 02" data-content-bg="portfolio.itens.1.imagem"></div>
+            <figcaption class="project__caption">
+              <span class="project__cat" data-content="portfolio.itens.1.categoria">Paisagismo</span>
+              <h3 class="project__title" data-content="portfolio.itens.1.titulo">Terraço Vértice</h3>
+            </figcaption>
+          </figure>
+
+          <figure class="project project--wide reveal">
+            <div class="image-placeholder" data-label="Projeto 03" data-content-bg="portfolio.itens.2.imagem"></div>
+            <figcaption class="project__caption">
+              <span class="project__cat" data-content="portfolio.itens.2.categoria">Comercial</span>
+              <h3 class="project__title" data-content="portfolio.itens.2.titulo">Studio Linha &amp; Folha</h3>
+            </figcaption>
+          </figure>
+
+          <figure class="project reveal">
+            <div class="image-placeholder" data-label="Projeto 04" data-content-bg="portfolio.itens.3.imagem"></div>
+            <figcaption class="project__caption">
+              <span class="project__cat" data-content="portfolio.itens.3.categoria">Interiores</span>
+              <h3 class="project__title" data-content="portfolio.itens.3.titulo">Apartamento Sereno</h3>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== DIFERENCIAIS ====================== -->
+    <section class="section diferenciais" id="diferenciais">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow eyebrow--light" data-content="diferenciais.eyebrow">Por que a ARQUIARTES</p>
+          <h2 class="section__title" data-content="diferenciais.title">Diferenciais que se sentem em cada espaço.</h2>
+        </div>
+
+        <div class="grid grid--4 diferenciais__grid">
+          <div class="feature reveal">
+            <span class="feature__num">01</span>
+            <h3 class="feature__title" data-content="diferenciais.itens.0.titulo">Projeto sob medida</h3>
+            <p data-content="diferenciais.itens.0.texto">Cada solução nasce do seu estilo de vida — nada é replicado.</p>
+          </div>
+          <div class="feature reveal">
+            <span class="feature__num">02</span>
+            <h3 class="feature__title" data-content="diferenciais.itens.1.titulo">Natureza presente</h3>
+            <p data-content="diferenciais.itens.1.texto">O paisagismo integrado dá alma e equilíbrio à arquitetura.</p>
+          </div>
+          <div class="feature reveal">
+            <span class="feature__num">03</span>
+            <h3 class="feature__title" data-content="diferenciais.itens.2.titulo">Cuidado com o detalhe</h3>
+            <p data-content="diferenciais.itens.2.texto">Precisão e refinamento em cada linha, material e acabamento.</p>
+          </div>
+          <div class="feature reveal">
+            <span class="feature__num">04</span>
+            <h3 class="feature__title" data-content="diferenciais.itens.3.titulo">Relação próxima</h3>
+            <p data-content="diferenciais.itens.3.texto">Um acompanhamento dedicado e transparente do início ao fim.</p>
+          </div>
+        </div>
+
+        <div class="stats reveal">
+          <div class="stat"><span class="stat__num" data-count="20" data-suffix="+" data-content-count="diferenciais.estatisticas.0">0</span><span class="stat__label" data-content="diferenciais.estatisticas.0.rotulo">Projetos realizados</span></div>
+          <div class="stat"><span class="stat__num" data-count="3" data-content-count="diferenciais.estatisticas.1">0</span><span class="stat__label" data-content="diferenciais.estatisticas.1.rotulo">Anos de experiência</span></div>
+          <div class="stat"><span class="stat__num" data-count="98" data-suffix="%" data-content-count="diferenciais.estatisticas.2">0</span><span class="stat__label" data-content="diferenciais.estatisticas.2.rotulo">Clientes satisfeitos</span></div>
+          <div class="stat"><span class="stat__num" data-count="100" data-suffix="%" data-content-count="diferenciais.estatisticas.3">0</span><span class="stat__label" data-content="diferenciais.estatisticas.3.rotulo">Projetos personalizados</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== DEPOIMENTOS ====================== -->
+    <section class="section depoimentos" id="depoimentos">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow" data-content="depoimentos.eyebrow">Quem confiou</p>
+          <h2 class="section__title" data-content="depoimentos.title">Histórias de quem viveu o resultado.</h2>
+        </div>
+
+        <div class="grid grid--3 depoimentos__grid">
+          <blockquote class="quote reveal">
+            <p data-content="depoimentos.itens.0.texto">A ARQUIARTES entendeu exatamente o que sonhávamos. O resultado superou tudo — nossa casa virou um refúgio.</p>
+            <footer><strong data-content="depoimentos.itens.0.nome">Marina &amp; Rafael</strong><span data-content="depoimentos.itens.0.papel">Residência particular</span></footer>
+          </blockquote>
+          <blockquote class="quote reveal">
+            <p data-content="depoimentos.itens.1.texto">Profissionalismo do início ao fim. O paisagismo deu uma vida nova ao nosso espaço corporativo.</p>
+            <footer><strong data-content="depoimentos.itens.1.nome">Camila Andrade</strong><span data-content="depoimentos.itens.1.papel">Diretora — Studio Andrade</span></footer>
+          </blockquote>
+          <blockquote class="quote reveal">
+            <p data-content="depoimentos.itens.2.texto">Sensibilidade, bom gosto e técnica. Cada detalhe foi pensado com um cuidado que se sente todos os dias.</p>
+            <footer><strong data-content="depoimentos.itens.2.nome">Eduardo Lima</strong><span data-content="depoimentos.itens.2.papel">Cliente residencial</span></footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== CTA ORÇAMENTO ====================== -->
+    <section class="cta" id="cta">
+      <div class="container cta__inner reveal">
+        <p class="eyebrow eyebrow--light" data-content="cta.eyebrow">Vamos começar</p>
+        <h2 class="cta__title" data-content="cta.title">Pronto para dar vida ao seu próximo projeto?</h2>
+        <p class="cta__text" data-content="cta.text">
+          Conte-nos sobre a sua ideia. Vamos transformá-la em um espaço que une
+          beleza, natureza e propósito.
+        </p>
+        <a href="#contato" class="btn btn--light" data-content="cta.btn">Solicitar orçamento</a>
+      </div>
+    </section>
+
+    <!-- ====================== CONTATO ====================== -->
+    <section class="section contato" id="contato">
+      <div class="container grid grid--2 contato__grid">
+        <div class="contato__info reveal">
+          <p class="eyebrow" data-content="contato.eyebrow">Fale conosco</p>
+          <h2 class="section__title" data-content="contato.title">Vamos conversar sobre o seu projeto.</h2>
+          <p data-content="contato.intro">Preencha o formulário ou utilize um dos canais abaixo. Retornamos o contato em até 1 dia útil.</p>
+
+          <ul class="contato__list">
+            <li>
+              <span class="contato__label">WhatsApp</span>
+              <a data-wa href="https://wa.me/5522991059221" data-content="contato.whatsappTexto" target="_blank" rel="noopener">(22) 99105-9221</a>
+            </li>
+            <li>
+              <span class="contato__label">Instagram</span>
+              <a data-content-href="contato.instagram" data-content="contato.instagramTexto" href="https://www.instagram.com/arquiartes.laisawermelinger" target="_blank" rel="noopener">@arquiartes.laisawermelinger</a>
+            </li>
+            <li>
+              <span class="contato__label">Atendimento</span>
+              <span data-content="contato.horario">Seg. a sex., das 9h às 18h</span>
+            </li>
+          </ul>
+        </div>
+
+        <form class="contato__form reveal" id="contatoForm" novalidate>
+          <div class="field">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" name="nome" required placeholder="Seu nome completo" />
+          </div>
+          <div class="field">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="seu@email.com" />
+          </div>
+          <div class="field">
+            <label for="telefone">Telefone</label>
+            <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" />
+          </div>
+          <div class="field">
+            <label for="mensagem">Mensagem</label>
+            <textarea id="mensagem" name="mensagem" rows="4" required placeholder="Conte-nos sobre o seu projeto..."></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--full">Enviar pelo WhatsApp</button>
+          <p class="form__feedback" id="formFeedback" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ====================== RODAPÉ ====================== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img src="assets/img/logo-mark.svg" alt="" class="footer__mark" aria-hidden="true" />
+        <span class="brand__name brand__name--light">ARQUIARTES</span>
+        <span class="brand__tagline">arquitetura &amp; paisagismo</span>
+        <p class="footer__about" data-content="footer.sobre">Projetos autorais que unem arquitetura contemporânea, paisagismo e sofisticação atemporal.</p>
+      </div>
+
+      <nav class="footer__nav" aria-label="Links do rodapé">
+        <h4>Navegação</h4>
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#portfolio">Projetos</a>
+        <a href="#contato">Contato</a>
+      </nav>
+
+      <div class="footer__contact">
+        <h4>Contato</h4>
+        <a data-wa href="https://wa.me/5522991059221" target="_blank" rel="noopener">WhatsApp · <span data-content="contato.whatsappTexto">(22) 99105-9221</span></a>
+        <a data-content-href="contato.instagram" data-content="contato.instagramTexto" href="https://www.instagram.com/arquiartes.laisawermelinger" target="_blank" rel="noopener">@arquiartes.laisawermelinger</a>
+        <div class="footer__social" aria-label="Redes sociais">
+          <a data-content-href="contato.instagram" href="https://www.instagram.com/arquiartes.laisawermelinger" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a data-content-href="contato.threads" href="https://www.threads.com/@arquiartes.laisawermelinger" target="_blank" rel="noopener" aria-label="Threads">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M16.5 11.5c-1-.4-2.2-.6-3.4-.5-1.7.1-2.8 1-2.7 2.2.1 1.1 1.1 1.7 2.4 1.6 1.7-.1 2.6-1.3 2.6-3.4 0-2.6-1.6-4-3.9-4-1.7 0-3 .8-3.7 2.1M12 21a9 9 0 1 1 0-18 9 9 0 0 1 0 18Z"/></svg>
+          </a>
+          <a data-wa href="https://wa.me/5522991059221" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.2-.7-2.7-1.1-4.4-3.8-4.5-4-.1-.2-1.1-1.5-1.1-2.8s.7-2 .9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.4 2.6 1.6.2.1.4.1.6-.1l.7-.9c.2-.2.4-.2.6-.1l1.9.9c.2.1.4.2.4.3.1.2.1.7-.1 1Z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <div class="container">
+        <span>© <span id="year"></span> ARQUIARTES — Arquitetura &amp; Paisagismo. Todos os direitos reservados.</span>
+        <span>Feito com cuidado e propósito.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botão flutuante WhatsApp -->
+  <a data-wa href="https://wa.me/5522991059221" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Fale conosco no WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.2-.7-2.7-1.1-4.4-3.8-4.5-4-.1-.2-1.1-1.5-1.1-2.8s.7-2 .9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.4 2.6 1.6.2.1.4.1.6-.1l.7-.9c.2-.2.4-.2.6-.1l1.9.9c.2.1.4.2.4.3.1.2.1.7-.1 1Z"/></svg>
+  </a>
+
+  <!-- Conteúdo editável (gerado pelo painel gerenciar.html) -->
+  <script src="assets/conteudo.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

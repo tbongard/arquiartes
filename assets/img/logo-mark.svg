@@ -1,0 +1,42 @@
+<svg viewBox="0 0 260 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ARQUIARTES — símbolo">
+  <g fill="none" stroke="#9c8b5c" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+    <!-- base / foot esquerda -->
+    <path d="M52 150 H44 V139 H60" />
+    <!-- bloco baixo esquerdo -->
+    <path d="M60 150 V104 H80" />
+    <!-- torre alta com topo inclinado -->
+    <path d="M80 150 V70 L122 50 V150" />
+    <path d="M100 60 V150" />
+    <!-- bloco direito -->
+    <path d="M122 150 H152 V94 H122" />
+    <path d="M137 94 V150" />
+    <!-- linha do chão -->
+    <path d="M44 150 H172" />
+
+    <!-- ramo -->
+    <path d="M150 122 C172 107 196 84 214 54" />
+    <!-- folhas (sprig) -->
+    <g stroke-width="2.1">
+      <g transform="translate(214 54) rotate(-32)">
+        <path d="M0 0 C5 -9 16 -11 23 -4 C16 4 5 6 0 0 Z" />
+        <path d="M2 -1 L20 -4" stroke-width="1.4" />
+      </g>
+      <g transform="translate(197 78) rotate(18)">
+        <path d="M0 0 C5 -8 15 -10 21 -3 C15 4 5 5 0 0 Z" />
+        <path d="M2 -1 L18 -3" stroke-width="1.3" />
+      </g>
+      <g transform="translate(192 70) rotate(-58)">
+        <path d="M0 0 C5 -8 15 -10 21 -3 C15 4 5 5 0 0 Z" />
+        <path d="M2 -1 L18 -3" stroke-width="1.3" />
+      </g>
+      <g transform="translate(176 98) rotate(28)">
+        <path d="M0 0 C5 -8 14 -9 20 -3 C14 4 5 5 0 0 Z" />
+        <path d="M2 -1 L17 -3" stroke-width="1.3" />
+      </g>
+      <g transform="translate(170 90) rotate(-50)">
+        <path d="M0 0 C5 -8 14 -9 20 -3 C14 4 5 5 0 0 Z" />
+        <path d="M2 -1 L17 -3" stroke-width="1.3" />
+      </g>
+    </g>
+  </g>
+</svg>

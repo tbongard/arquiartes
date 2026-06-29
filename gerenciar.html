@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Painel · ARQUIARTES</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/gerenciar.css" />
+</head>
+<body>
+
+  <!-- ===================== LOGIN ===================== -->
+  <div class="login" id="login">
+    <form class="login__card" id="loginForm" autocomplete="off">
+      <img src="assets/img/logo-mark.svg" alt="" class="login__mark" />
+      <div class="login__title">ARQUIARTES</div>
+      <div class="login__sub">Painel de gerenciamento</div>
+
+      <div class="field">
+        <label for="usuario">Usuário</label>
+        <input type="text" id="usuario" name="usuario" required autocomplete="username" />
+      </div>
+      <div class="field">
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" name="senha" required autocomplete="current-password" />
+      </div>
+      <button type="submit" class="btn primary" style="width:100%">Entrar</button>
+      <p class="login__error" id="loginError"></p>
+    </form>
+  </div>
+
+  <!-- ===================== APP ===================== -->
+  <div class="app" id="app" hidden>
+    <header class="topbar">
+      <div class="topbar__brand">
+        <img src="assets/img/logo-mark.svg" alt="" />
+        <div>
+          <b>ARQUIARTES</b>
+          <span>Painel de conteúdo</span>
+        </div>
+      </div>
+      <div class="topbar__actions">
+        <span class="whoami" id="whoami"></span>
+        <button class="btn ghost" id="btnPreview">Pré-visualizar</button>
+        <button class="btn" id="btnSave">Salvar rascunho</button>
+        <button class="btn primary" id="btnPublishOnline">Publicar no site</button>
+        <button class="btn" id="btnPublish">Exportar arquivo</button>
+        <button class="btn ghost" id="btnLogout">Sair</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <nav class="sidebar" id="tabs" aria-label="Seções"></nav>
+      <main class="content" id="formArea"></main>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <input type="file" id="fileImport" accept=".js,.json,application/json,text/javascript" hidden />
+
+  <script src="assets/conteudo.js"></script>
+  <script src="js/gerenciar.js"></script>
+</body>
+</html>
