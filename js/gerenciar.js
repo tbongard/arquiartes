@@ -58,11 +58,14 @@
       { p: 'portfolio.eyebrow', l: 'Selo', t: 'text' },
       { p: 'portfolio.title', l: 'Título', t: 'textarea' },
       { p: 'portfolio.lead', l: 'Texto de apoio', t: 'textarea' },
-      { p: 'portfolio.itens', l: 'Projetos', t: 'items', item: [
-        { k: 'categoria', l: 'Categoria', t: 'text' },
-        { k: 'titulo', l: 'Nome do projeto', t: 'text' },
-        { k: 'imagem', l: 'Foto do projeto', t: 'image', full: true }
-      ]}
+      { p: 'portfolio.itens', l: 'Projetos', t: 'items', addable: true,
+        addLabel: '+ Adicionar projeto',
+        novo: { categoria: 'Categoria', titulo: 'Novo projeto', imagem: '' },
+        item: [
+          { k: 'categoria', l: 'Categoria', t: 'text' },
+          { k: 'titulo', l: 'Nome do projeto', t: 'text' },
+          { k: 'imagem', l: 'Foto do projeto', t: 'image', full: true }
+        ]}
     ]},
     { id: 'diferenciais', label: 'Diferenciais', hint: 'e números', fields: [
       { p: 'diferenciais.eyebrow', l: 'Selo', t: 'text' },
@@ -440,7 +443,23 @@
     var arr = getPath(content, f.p) || [];
     arr.forEach(function (item, i) {
       var card = el('div', { class: 'item-card' });
-      card.appendChild(el('div', { class: 'item-card__head', text: (i + 1) + '.' }));
+      var head = el('div', { class: 'item-card__head' });
+      head.appendChild(el('span', { text: (i + 1) + '.' }));
+      if (f.addable) {
+        var btnRem = el('button', { class: 'btn small danger', type: 'button', text: 'Remover' });
+        btnRem.style.marginLeft = '0.8rem';
+        btnRem.addEventListener('click', function () {
+          if (confirm('Remover este item?')) {
+            var a = getPath(content, f.p) || [];
+            a.splice(i, 1);
+            setPath(content, f.p, a);
+            salvarRascunho(true);
+            renderForm(secaoAtiva);
+          }
+        });
+        head.appendChild(btnRem);
+      }
+      card.appendChild(head);
       var grid = el('div', { class: 'item-grid' });
       f.item.forEach(function (sub) {
         var subPath = f.p + '.' + i + '.' + sub.k;
@@ -449,6 +468,17 @@
       card.appendChild(grid);
       wrap.appendChild(card);
     });
+    if (f.addable) {
+      var btnAdd = el('button', { class: 'btn', type: 'button', text: f.addLabel || '+ Adicionar' });
+      btnAdd.addEventListener('click', function () {
+        var a = getPath(content, f.p) || [];
+        a.push(clone(f.novo || {}));
+        setPath(content, f.p, a);
+        salvarRascunho(true);
+        renderForm(secaoAtiva);
+      });
+      wrap.appendChild(btnAdd);
+    }
     return wrap;
   }
 

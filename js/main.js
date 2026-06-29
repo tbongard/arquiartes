@@ -65,6 +65,43 @@
         el.setAttribute('href', 'https://wa.me/' + c.contato.whatsapp);
       });
     }
+
+    // Portfólio: reconstrói a grade com a quantidade de projetos existente
+    renderPortfolio(c);
+  }
+
+  function renderPortfolio(c) {
+    if (!c || !c.portfolio || !Array.isArray(c.portfolio.itens)) return;
+    var grid = document.getElementById('portfolioGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    c.portfolio.itens.forEach(function (item, i) {
+      var fig = document.createElement('figure');
+      fig.className = 'project reveal';
+
+      var ph = document.createElement('div');
+      ph.className = 'image-placeholder';
+      ph.setAttribute('data-label', 'Projeto ' + (i + 1));
+      if (item.imagem) {
+        ph.style.backgroundImage = 'url("' + item.imagem + '")';
+        ph.classList.add('has-image');
+      }
+
+      var cap = document.createElement('figcaption');
+      cap.className = 'project__caption';
+      var cat = document.createElement('span');
+      cat.className = 'project__cat';
+      cat.textContent = item.categoria || '';
+      var tit = document.createElement('h3');
+      tit.className = 'project__title';
+      tit.textContent = item.titulo || '';
+      cap.appendChild(cat);
+      cap.appendChild(tit);
+
+      fig.appendChild(ph);
+      fig.appendChild(cap);
+      grid.appendChild(fig);
+    });
   }
 
   var CONTENT = window.SITE_CONTENT || null;
