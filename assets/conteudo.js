@@ -1,7 +1,7 @@
 /* ARQUIARTES — conteúdo do site (gerado pelo painel) */
 window.SITE_CONTENT = {
   "hero": {
-    "eyebrow": "Arquitetura & Paisagismo S2",
+    "eyebrow": "Arquitetura & Paisagismo",
     "title": "Espaços que respiram\narte, natureza e propósito.",
     "text": "Criamos projetos autorais de arquitetura e paisagismo que traduzem a essência de quem vive cada espaço — com equilíbrio entre design contemporâneo, natureza e sofisticação atemporal.",
     "btnPrimary": "Solicitar orçamento",
