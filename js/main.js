@@ -66,8 +66,49 @@
       });
     }
 
-    // Portfólio: reconstrói a grade com a quantidade de projetos existente
+    // Seções dinâmicas: reconstroem com a quantidade de itens existente
+    renderServices(c);
     renderPortfolio(c);
+    renderDiferenciais(c);
+    renderDepoimentos(c);
+  }
+
+  /* ---------- Serviços (ícones + cards dinâmicos) ---------- */
+  var SERVICO_ICONES = {
+    arquitetura: '<path d="M6 42V20L24 6l18 14v22"/><path d="M18 42V28h12v14"/>',
+    paisagismo: '<path d="M24 42c10-6 14-14 14-22a14 14 0 0 0-28 0c0 8 4 16 14 22Z"/><path d="M24 20v22M24 26l6-6M24 30l-6-6"/>',
+    interiores: '<rect x="8" y="8" width="32" height="32" rx="2"/><path d="M8 20h32M20 8v32"/>',
+    consultoria: '<path d="M6 38h36M10 38V18l14-10 14 10v20"/><path d="M20 38V26h8v12"/>',
+    obra: '<circle cx="24" cy="24" r="16"/><path d="M24 8v8M24 32v8M8 24h8M32 24h8"/>',
+    sustentavel: '<path d="M24 6c8 6 12 12 12 20a12 12 0 0 1-24 0c0-8 4-14 12-20Z"/><circle cx="24" cy="26" r="5"/>',
+    generico: '<path d="M24 5l19 19-19 19L5 24z"/>'
+  };
+  var SERVICO_ORDEM = ['arquitetura', 'paisagismo', 'interiores', 'consultoria', 'obra', 'sustentavel'];
+  function svgServico(key, i) {
+    var k = key || SERVICO_ORDEM[i] || 'generico';
+    var inner = SERVICO_ICONES[k] || SERVICO_ICONES.generico;
+    return '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">' + inner + '</svg>';
+  }
+  function renderServices(c) {
+    if (!c || !c.servicos || !Array.isArray(c.servicos.itens)) return;
+    var grid = document.getElementById('servicosGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    c.servicos.itens.forEach(function (item, i) {
+      var art = document.createElement('article');
+      art.className = 'card reveal';
+      var icon = document.createElement('span');
+      icon.className = 'card__icon';
+      icon.setAttribute('aria-hidden', 'true');
+      icon.innerHTML = svgServico(item.icone, i);
+      var h = document.createElement('h3');
+      h.className = 'card__title';
+      h.textContent = item.titulo || '';
+      var p = document.createElement('p');
+      p.textContent = item.descricao || '';
+      art.appendChild(icon); art.appendChild(h); art.appendChild(p);
+      grid.appendChild(art);
+    });
   }
 
   function renderPortfolio(c) {
@@ -78,7 +119,6 @@
     c.portfolio.itens.forEach(function (item, i) {
       var fig = document.createElement('figure');
       fig.className = 'project reveal';
-
       var ph = document.createElement('div');
       ph.className = 'image-placeholder';
       ph.setAttribute('data-label', 'Projeto ' + (i + 1));
@@ -86,7 +126,6 @@
         ph.style.backgroundImage = 'url("' + item.imagem + '")';
         ph.classList.add('has-image');
       }
-
       var cap = document.createElement('figcaption');
       cap.className = 'project__caption';
       var cat = document.createElement('span');
@@ -95,12 +134,53 @@
       var tit = document.createElement('h3');
       tit.className = 'project__title';
       tit.textContent = item.titulo || '';
-      cap.appendChild(cat);
-      cap.appendChild(tit);
-
-      fig.appendChild(ph);
-      fig.appendChild(cap);
+      cap.appendChild(cat); cap.appendChild(tit);
+      fig.appendChild(ph); fig.appendChild(cap);
       grid.appendChild(fig);
+    });
+  }
+
+  /* ---------- Diferenciais (cards numerados, dinâmicos) ---------- */
+  function renderDiferenciais(c) {
+    if (!c || !c.diferenciais || !Array.isArray(c.diferenciais.itens)) return;
+    var grid = document.getElementById('diferenciaisGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    c.diferenciais.itens.forEach(function (item, i) {
+      var div = document.createElement('div');
+      div.className = 'feature reveal';
+      var num = document.createElement('span');
+      num.className = 'feature__num';
+      num.textContent = ('0' + (i + 1)).slice(-2);
+      var h = document.createElement('h3');
+      h.className = 'feature__title';
+      h.textContent = item.titulo || '';
+      var p = document.createElement('p');
+      p.textContent = item.texto || '';
+      div.appendChild(num); div.appendChild(h); div.appendChild(p);
+      grid.appendChild(div);
+    });
+  }
+
+  /* ---------- Depoimentos (dinâmicos) ---------- */
+  function renderDepoimentos(c) {
+    if (!c || !c.depoimentos || !Array.isArray(c.depoimentos.itens)) return;
+    var grid = document.getElementById('depoimentosGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    c.depoimentos.itens.forEach(function (item) {
+      var bq = document.createElement('blockquote');
+      bq.className = 'quote reveal';
+      var p = document.createElement('p');
+      p.textContent = item.texto || '';
+      var foot = document.createElement('footer');
+      var strong = document.createElement('strong');
+      strong.textContent = item.nome || '';
+      var span = document.createElement('span');
+      span.textContent = item.papel || '';
+      foot.appendChild(strong); foot.appendChild(span);
+      bq.appendChild(p); bq.appendChild(foot);
+      grid.appendChild(bq);
     });
   }
 

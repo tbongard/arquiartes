@@ -100,6 +100,7 @@ img { display: block; max-width: 100%; }
 .field input[type="email"],
 .field input[type="tel"],
 .field input[type="password"],
+.field select,
 .field textarea {
   width: 100%; font-size: 0.95rem; font-weight: 300; color: var(--ink);
   padding: 0.7rem 0.85rem; border: 1px solid var(--gray-line); border-radius: var(--radius);

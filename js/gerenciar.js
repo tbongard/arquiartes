@@ -49,10 +49,23 @@
       { p: 'servicos.eyebrow', l: 'Selo', t: 'text' },
       { p: 'servicos.title', l: 'Título', t: 'textarea' },
       { p: 'servicos.lead', l: 'Texto de apoio', t: 'textarea' },
-      { p: 'servicos.itens', l: 'Serviços', t: 'items', item: [
-        { k: 'titulo', l: 'Título', t: 'text' },
-        { k: 'descricao', l: 'Descrição', t: 'textarea', full: true }
-      ]}
+      { p: 'servicos.itens', l: 'Serviços', t: 'items', addable: true,
+        addLabel: '+ Adicionar serviço',
+        novo: { titulo: 'Novo serviço', descricao: '', icone: '' },
+        item: [
+          { k: 'titulo', l: 'Título', t: 'text' },
+          { k: 'icone', l: 'Ícone', t: 'select', opcoes: [
+            { v: '', l: 'Ícone automático' },
+            { v: 'arquitetura', l: 'Prédio' },
+            { v: 'paisagismo', l: 'Folha' },
+            { v: 'interiores', l: 'Janela' },
+            { v: 'consultoria', l: 'Casa' },
+            { v: 'obra', l: 'Bússola' },
+            { v: 'sustentavel', l: 'Folha (gota)' },
+            { v: 'generico', l: 'Losango' }
+          ]},
+          { k: 'descricao', l: 'Descrição', t: 'textarea', full: true }
+        ]}
     ]},
     { id: 'portfolio', label: 'Projetos', hint: 'portfólio', fields: [
       { p: 'portfolio.eyebrow', l: 'Selo', t: 'text' },
@@ -70,10 +83,13 @@
     { id: 'diferenciais', label: 'Diferenciais', hint: 'e números', fields: [
       { p: 'diferenciais.eyebrow', l: 'Selo', t: 'text' },
       { p: 'diferenciais.title', l: 'Título', t: 'textarea' },
-      { p: 'diferenciais.itens', l: 'Diferenciais', t: 'items', item: [
-        { k: 'titulo', l: 'Título', t: 'text' },
-        { k: 'texto', l: 'Texto', t: 'textarea', full: true }
-      ]},
+      { p: 'diferenciais.itens', l: 'Diferenciais', t: 'items', addable: true,
+        addLabel: '+ Adicionar diferencial',
+        novo: { titulo: 'Novo diferencial', texto: '' },
+        item: [
+          { k: 'titulo', l: 'Título', t: 'text' },
+          { k: 'texto', l: 'Texto', t: 'textarea', full: true }
+        ]},
       { p: 'diferenciais.estatisticas', l: 'Números (estatísticas)', t: 'items', item: [
         { k: 'numero', l: 'Número', t: 'text' },
         { k: 'sufixo', l: 'Sufixo (ex.: + ou %)', t: 'text' },
@@ -83,11 +99,14 @@
     { id: 'depoimentos', label: 'Depoimentos', hint: '3 clientes', fields: [
       { p: 'depoimentos.eyebrow', l: 'Selo', t: 'text' },
       { p: 'depoimentos.title', l: 'Título', t: 'textarea' },
-      { p: 'depoimentos.itens', l: 'Depoimentos', t: 'items', item: [
-        { k: 'texto', l: 'Depoimento', t: 'textarea', full: true },
-        { k: 'nome', l: 'Nome', t: 'text' },
-        { k: 'papel', l: 'Descrição (ex.: cliente)', t: 'text' }
-      ]}
+      { p: 'depoimentos.itens', l: 'Depoimentos', t: 'items', addable: true,
+        addLabel: '+ Adicionar depoimento',
+        novo: { texto: '', nome: '', papel: '' },
+        item: [
+          { k: 'texto', l: 'Depoimento', t: 'textarea', full: true },
+          { k: 'nome', l: 'Nome', t: 'text' },
+          { k: 'papel', l: 'Descrição (ex.: cliente)', t: 'text' }
+        ]}
     ]},
     { id: 'contato', label: 'Contato', hint: 'e redes', fields: [
       { p: 'contato.eyebrow', l: 'Selo', t: 'text' },
@@ -355,17 +374,25 @@
     var wrap = el('div', { class: 'field' + (f.full ? ' full' : '') });
     wrap.appendChild(el('label', { text: f.l }));
     var input;
-    if (f.t === 'textarea') {
+    if (f.t === 'select') {
+      input = el('select');
+      (f.opcoes || []).forEach(function (o) {
+        input.appendChild(el('option', { value: o.v, text: o.l }));
+      });
+      input.value = value == null ? '' : value;
+      input.addEventListener('change', function () {
+        setPath(content, path, input.value);
+        agendarSalvar();
+      });
+    } else if (f.t === 'textarea') {
       input = el('textarea');
       input.value = value == null ? '' : value;
+      input.addEventListener('input', function () { setPath(content, path, input.value); agendarSalvar(); });
     } else {
       input = el('input', { type: 'text' });
       input.value = value == null ? '' : value;
+      input.addEventListener('input', function () { setPath(content, path, input.value); agendarSalvar(); });
     }
-    input.addEventListener('input', function () {
-      setPath(content, path, input.value);
-      agendarSalvar();
-    });
     wrap.appendChild(input);
     if (f.hint) wrap.appendChild(el('p', { class: 'hint', text: f.hint }));
     return wrap;
