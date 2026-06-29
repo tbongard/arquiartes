@@ -90,11 +90,14 @@
           { k: 'titulo', l: 'Título', t: 'text' },
           { k: 'texto', l: 'Texto', t: 'textarea', full: true }
         ]},
-      { p: 'diferenciais.estatisticas', l: 'Números (estatísticas)', t: 'items', item: [
-        { k: 'numero', l: 'Número', t: 'text' },
-        { k: 'sufixo', l: 'Sufixo (ex.: + ou %)', t: 'text' },
-        { k: 'rotulo', l: 'Rótulo', t: 'text', full: true }
-      ]}
+      { p: 'diferenciais.estatisticas', l: 'Números (estatísticas)', t: 'items', addable: true,
+        addLabel: '+ Adicionar número',
+        novo: { numero: '0', sufixo: '', rotulo: 'Novo número' },
+        item: [
+          { k: 'numero', l: 'Número', t: 'text' },
+          { k: 'sufixo', l: 'Sufixo (ex.: + ou %)', t: 'text' },
+          { k: 'rotulo', l: 'Rótulo', t: 'text', full: true }
+        ]}
     ]},
     { id: 'depoimentos', label: 'Depoimentos', hint: '3 clientes', fields: [
       { p: 'depoimentos.eyebrow', l: 'Selo', t: 'text' },

@@ -70,7 +70,30 @@
     renderServices(c);
     renderPortfolio(c);
     renderDiferenciais(c);
+    renderStats(c);
     renderDepoimentos(c);
+  }
+
+  /* ---------- Estatísticas (números animados, dinâmicos) ---------- */
+  function renderStats(c) {
+    if (!c || !c.diferenciais || !Array.isArray(c.diferenciais.estatisticas)) return;
+    var grid = document.getElementById('statsGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    c.diferenciais.estatisticas.forEach(function (item) {
+      var stat = document.createElement('div');
+      stat.className = 'stat';
+      var num = document.createElement('span');
+      num.className = 'stat__num';
+      num.setAttribute('data-count', item.numero || '0');
+      if (item.sufixo) num.setAttribute('data-suffix', item.sufixo);
+      num.textContent = '0';
+      var label = document.createElement('span');
+      label.className = 'stat__label';
+      label.textContent = item.rotulo || '';
+      stat.appendChild(num); stat.appendChild(label);
+      grid.appendChild(stat);
+    });
   }
 
   /* ---------- Serviços (ícones + cards dinâmicos) ---------- */
