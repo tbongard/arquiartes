@@ -192,7 +192,7 @@ window.SITE_CONTENT = {
     "instagramTexto": "@arquiartes.laisawermelinger",
     "threads": "https://www.threads.com/@arquiartes.laisawermelinger",
     "horario": "Seg. a sex., das 9h às 18h",
-    "email": ""
+    "email": "laisawermelinger@gmail.com"
   },
   "essencia": {
     "eyebrow": "Nossa essência",
