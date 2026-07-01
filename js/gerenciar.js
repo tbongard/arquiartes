@@ -134,6 +134,7 @@
       { p: 'contato.email', l: 'E-mail (opcional)', t: 'text' },
       { p: 'footer.sobre', l: 'Texto do rodapé', t: 'textarea' }
     ]},
+    { id: 'publicacao', label: 'Publicação', hint: 'colocar no ar', fields: [] },
     { id: 'avancado', label: 'Avançado', hint: 'admin', adminOnly: true, fields: [] }
   ];
 
@@ -370,6 +371,7 @@
     area.innerHTML = '';
 
     if (sec.adminOnly) { renderAvancado(area); return; }
+    if (sec.id === 'publicacao') { renderPublicacao(area); return; }
 
     area.appendChild(el('h2', { class: 'content__title', text: sec.label }));
     area.appendChild(el('p', { class: 'content__desc', text: 'Edite os textos e imagens desta seção. As alterações são salvas automaticamente como rascunho.' }));
@@ -525,15 +527,19 @@
   /* ============================================================
      8) SEÇÃO AVANÇADA (admin)
      ============================================================ */
-  function renderAvancado(area) {
-    area.appendChild(el('h2', { class: 'content__title', text: 'Avançado' }));
-    area.appendChild(el('p', { class: 'content__desc', text: 'Ferramentas administrativas. Use com cuidado.' }));
+  /* Aba "Publicação" (visível a todos): configura o GitHub */
+  function renderPublicacao(area) {
+    area.appendChild(el('h2', { class: 'content__title', text: 'Publicação' }));
+    area.appendChild(el('p', { class: 'content__desc', text: 'Conecte ao GitHub uma vez neste navegador. Depois, o botão "Publicar no site" (no topo) coloca suas alterações no ar em ~1 minuto.' }));
+    buildGithubConfig(area);
+  }
 
-    // ---- Publicação online (GitHub) ----
+  /* Bloco de configuração do GitHub (usado na aba Publicação) */
+  function buildGithubConfig(area) {
     var cfg = ghConfig();
     var gh = el('div', { class: 'item-card' });
     gh.appendChild(el('div', { class: 'item-card__head', text: 'Publicação online (GitHub)' }));
-    gh.appendChild(el('p', { class: 'hint', text: 'Conecta o painel ao repositório. O botão "Publicar no site" envia o conteúdo e a Netlify atualiza o site sozinha. O token fica salvo só neste navegador — nunca vai para o site público.' }));
+    gh.appendChild(el('p', { class: 'hint', text: 'Conecta o painel ao repositório. O token fica salvo só neste navegador — nunca vai para o site público.' }));
 
     function inp(label, val, hint, type) {
       var w = el('div', { class: 'field' });
@@ -545,7 +551,7 @@
       gh.appendChild(w);
       return i;
     }
-    var iRepo = inp('Repositório (usuário/nome)', cfg.repo, 'Ex.: laisawermelinger/arquiartes');
+    var iRepo = inp('Repositório (usuário/nome)', cfg.repo, 'Ex.: tbongard/arquiartes');
     var iBranch = inp('Branch', cfg.branch || 'main', 'Normalmente "main".');
     var iPath = inp('Caminho do arquivo', cfg.path || 'assets/conteudo.js');
     var iToken = inp('Token de acesso (GitHub)', ghToken(), 'Token "fine-grained" com permissão de Conteúdo (leitura e escrita) só neste repositório.', 'password');
@@ -578,6 +584,14 @@
     ghActions.appendChild(btnGhForget);
     gh.appendChild(ghActions);
     area.appendChild(gh);
+  }
+
+  /* ============================================================
+     8) SEÇÃO AVANÇADA (admin)
+     ============================================================ */
+  function renderAvancado(area) {
+    area.appendChild(el('h2', { class: 'content__title', text: 'Avançado' }));
+    area.appendChild(el('p', { class: 'content__desc', text: 'Ferramentas administrativas. Use com cuidado.' }));
 
     // Importar
     var imp = el('div', { class: 'field' });
