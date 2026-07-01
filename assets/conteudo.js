@@ -21,7 +21,7 @@ window.SITE_CONTENT = {
       "Acompanhamento dedicado em todas as etapas"
     ],
     "ano": "2023",
-    "imagem": "assets/img/foto-1782932772732-820752.jpg"
+    "imagem": "assets/img/foto-1782933431258-176566.jpg"
   },
   "servicos": {
     "eyebrow": "O que fazemos",
