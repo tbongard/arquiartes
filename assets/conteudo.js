@@ -3,18 +3,18 @@ window.SITE_CONTENT = {
   "hero": {
     "eyebrow": "Arquitetura & Paisagismo",
     "title": "Espaços que respiram\narte, natureza e propósito.",
-    "text": "Criamos projetos autorais de arquitetura e paisagismo que traduzem a essência de quem vive cada espaço — com equilíbrio entre design contemporâneo, natureza e sofisticação atemporal.",
+    "text": "Projetos contemporâneos e integrados à natureza, pensados para transformar espaços e vidas.",
     "btnPrimary": "Solicitar orçamento",
     "btnSecondary": "Ver projetos",
     "name": "Laísa Wermelinger",
-    "role": "Arquitetura & Paisagismo",
+    "role": "Arquiteta & Paisagista",
     "photo": "assets/img/laisa.jpg"
   },
   "sobre": {
     "eyebrow": "Sobre a ARQUIARTES",
     "title": "Arquitetura que nasce do diálogo entre pessoas e natureza.",
-    "p1": "A ARQUIARTES é um escritório dedicado a transformar ideias em ambientes que inspiram. Unimos arquitetura contemporânea e paisagismo autoral para criar espaços únicos, funcionais e profundamente conectados ao seu entorno.",
-    "p2": "Cada projeto é conduzido com escuta atenta, cuidado com os detalhes e compromisso com a excelência — do primeiro esboço à entrega final. Acreditamos que bons espaços não apenas abrigam: eles acolhem, emocionam e perduram.",
+    "p1": "Nosso propósito é criar projetos que unem arquitetura e natureza de forma harmônica, promovendo bem-estar, funcionalidade e beleza para transformar espaços e vidas.",
+    "p2": "Desenvolvemos projetos autorais e personalizados que traduzem a essência de cada cliente, integrando arquitetura, paisagismo e natureza com sensibilidade e excelência.",
     "itens": [
       "Projetos exclusivos e personalizados",
       "Integração entre interior, arquitetura e paisagem",

@@ -2,20 +2,20 @@
    ARQUIARTES — Painel de gerenciamento
    ============================================================ */
 :root {
-  --green-deep: #313f31;
-  --green-soft: #586556;
-  --gold: #9c8b5c;
-  --gold-soft: #b6a87f;
-  --beige: #cabda3;
-  --off-white: #f1ece1;
+  --green-deep: #1F2E26;
+  --green-soft: #7A8A7A;
+  --gold: #B28D5A;
+  --gold-soft: #c9a87c;
+  --beige: #DCD6CB;
+  --off-white: #F6F3EF;
   --white: #fff;
-  --gray-soft: #9a9384;
-  --gray-line: #e2dbcc;
-  --ink: #2a2c28;
+  --gray-soft: #928c7f;
+  --gray-line: #e4ded4;
+  --ink: #23261f;
   --danger: #a85a4a;
   --ok: #5a7a52;
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: 'Cinzel', Georgia, serif;
+  --font-sans: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
   --radius: 4px;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }

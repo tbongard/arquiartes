@@ -6,22 +6,22 @@
 
 /* ---------- Variáveis ---------- */
 :root {
-  /* Cores da marca (extraídas da logo) */
-  --green-deep:   #313f31;   /* verde escuro do wordmark */
-  --green-soft:   #586556;   /* verde acinzentado */
-  --gold:         #9c8b5c;   /* dourado/oliva do símbolo */
-  --gold-soft:    #b6a87f;   /* dourado claro */
-  --beige:        #cabda3;   /* bege */
-  --beige-light:  #e7dfd0;   /* bege claro */
-  --off-white:    #f1ece1;   /* off-white / fundo (creme da logo) */
+  /* Cores oficiais da marca (manual de identidade) */
+  --green-deep:   #1F2E26;   /* verde escuro — sofisticação, natureza */
+  --green-soft:   #7A8A7A;   /* verde suave — equilíbrio, harmonia */
+  --gold:         #B28D5A;   /* dourado — requinte, exclusividade */
+  --gold-soft:    #c9a87c;   /* dourado claro (tom auxiliar) */
+  --beige:        #DCD6CB;   /* bege/areia — leveza, acolhimento */
+  --beige-light:  #e9e4db;   /* bege claro */
+  --off-white:    #F6F3EF;   /* off-white — clareza, espaço */
   --white:        #ffffff;
-  --gray-soft:    #9a9384;   /* cinza suave (texto secundário) */
-  --gray-line:    #e2dbcc;   /* linhas finas */
-  --ink:          #2a2c28;   /* texto principal */
+  --gray-soft:    #928c7f;   /* cinza suave (texto secundário) */
+  --gray-line:    #e4ded4;   /* linhas finas */
+  --ink:          #23261f;   /* texto principal */
 
-  /* Tipografia */
-  --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-  --font-sans:  'Jost', 'Helvetica Neue', Arial, sans-serif;
+  /* Tipografia oficial: Cinzel (títulos) + Montserrat (textos) */
+  --font-serif: 'Cinzel', Georgia, 'Times New Roman', serif;
+  --font-sans:  'Montserrat', 'Helvetica Neue', Arial, sans-serif;
 
   /* Espaçamento / medidas */
   --container: 1200px;
@@ -57,12 +57,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 h1, h2, h3, h4 {
   font-family: var(--font-serif);
   font-weight: 500;
-  line-height: 1.12;
-  letter-spacing: 0.005em;
+  line-height: 1.28;
+  letter-spacing: 0.03em;
   color: var(--green-deep);
 }
 
-p { color: #555049; }
+p { color: #4f4a42; }
 
 .eyebrow {
   font-family: var(--font-sans);
@@ -96,7 +96,7 @@ p { color: #555049; }
 .section { padding-block: var(--section-y); }
 
 .section__title {
-  font-size: clamp(1.9rem, 4vw, 3.1rem);
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
   margin-bottom: 1.4rem;
 }
 
@@ -319,8 +319,9 @@ p { color: #555049; }
 .hero__content { position: relative; z-index: 2; }
 .hero__title {
   color: var(--white);
-  font-size: clamp(2.1rem, 4vw, 3.5rem);
+  font-size: clamp(1.7rem, 3.2vw, 2.7rem);
   font-weight: 500;
+  line-height: 1.24;
   margin-bottom: 1.6rem;
 }
 .hero__text {
@@ -455,7 +456,7 @@ p { color: #555049; }
 }
 .card:hover .card__icon { background: var(--green-deep); color: var(--off-white); border-color: var(--green-deep); }
 .card__icon svg { width: 28px; height: 28px; }
-.card__title { font-size: 1.45rem; margin-bottom: 0.7rem; }
+.card__title { font-size: 1.15rem; margin-bottom: 0.7rem; }
 .card p { font-size: 0.98rem; }
 
 /* ============================================================
@@ -487,7 +488,7 @@ p { color: #555049; }
   text-transform: uppercase;
   color: var(--beige);
 }
-.project__title { color: var(--white); font-size: 1.5rem; margin-top: 0.3rem; }
+.project__title { color: var(--white); font-size: 1.15rem; margin-top: 0.4rem; }
 
 /* ============================================================
    DIFERENCIAIS
@@ -503,7 +504,7 @@ p { color: #555049; }
   display: block;
   margin-bottom: 0.8rem;
 }
-.feature__title { color: var(--off-white); font-size: 1.35rem; margin-bottom: 0.5rem; }
+.feature__title { color: var(--off-white); font-size: 1.05rem; margin-bottom: 0.6rem; }
 .feature p { color: rgba(255,255,255,0.7); font-size: 0.95rem; }
 
 .stats {
@@ -553,11 +554,12 @@ p { color: #555049; }
   opacity: 0.5;
 }
 .quote p {
-  font-family: var(--font-serif);
-  font-size: 1.3rem;
+  font-family: var(--font-sans);
+  font-size: 1.02rem;
   font-style: italic;
+  font-weight: 300;
   color: var(--green-deep);
-  line-height: 1.5;
+  line-height: 1.6;
   margin: 1.2rem 0 1.6rem;
   position: relative;
   z-index: 1;
@@ -583,7 +585,7 @@ p { color: #555049; }
   background: repeating-linear-gradient(90deg, transparent 0 90px, rgba(255,255,255,0.02) 90px 91px);
 }
 .cta__inner { position: relative; max-width: 640px; margin-inline: auto; }
-.cta__title { color: var(--off-white); font-size: clamp(2rem, 4.5vw, 3.2rem); margin-bottom: 1.2rem; }
+.cta__title { color: var(--off-white); font-size: clamp(1.6rem, 3.4vw, 2.5rem); line-height: 1.24; margin-bottom: 1.2rem; }
 .cta__text { color: rgba(255,255,255,0.8); margin-bottom: 2.2rem; font-size: 1.08rem; }
 
 /* ============================================================
@@ -655,6 +657,8 @@ p { color: #555049; }
   padding-bottom: 3rem;
 }
 .footer__mark { width: 64px; height: auto; margin-bottom: 1rem; opacity: 0.95; }
+.brand__divider { position: relative; display: block; width: 190px; max-width: 90%; height: 1px; background: var(--gold); margin: 0.75rem 0; }
+.brand__divider::after { content: ''; position: absolute; left: 50%; top: 50%; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); transform: translate(-50%, -50%); }
 .footer__brand .brand__name { font-size: 1.6rem; display: block; }
 .footer__brand .brand__tagline { display: block; margin-top: 0.4rem; }
 .footer__about { margin-top: 1rem; max-width: 320px; font-size: 0.95rem; color: rgba(255,255,255,0.55); }
