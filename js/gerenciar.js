@@ -250,8 +250,8 @@
     var cfg = ghConfig();
     var token = ghToken();
     if (!cfg.repo || !token) {
-      toast('Configure a publicação online em "Avançado" (repositório e token).', true);
-      if (sessao && sessao.papel === 'admin') ativarSecao('avancado');
+      toast('Configure a publicação na aba "Publicação" (repositório e token).', true);
+      ativarSecao('publicacao');
       return;
     }
     var branch = cfg.branch || 'main';
