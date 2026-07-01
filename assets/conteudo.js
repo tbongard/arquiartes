@@ -160,19 +160,24 @@ window.SITE_CONTENT = {
     "title": "Histórias de quem viveu o resultado.",
     "itens": [
       {
-        "texto": "A ARQUIARTES entendeu exatamente o que sonhávamos. O resultado superou tudo — nossa casa virou um refúgio.",
-        "nome": "Marina & Rafael",
-        "papel": "Residência particular"
+        "texto": "Superou nossas expectativas! A área gourmet ficou elegante, funcional e perfeita para receber a família e os amigos. O projeto aproveitou muito bem o espaço.",
+        "nome": "Alê e Manu",
+        "papel": "Residêncial"
       },
       {
-        "texto": "Profissionalismo do início ao fim. O paisagismo deu uma vida nova ao nosso espaço corporativo.",
-        "nome": "Camila Andrade",
-        "papel": "Diretora — Studio Andrade"
+        "texto": "Profissionalismo do início ao fim. O paisagismo deu uma vida nova ao meu jardim.",
+        "nome": "Denise",
+        "papel": "Paisagismo"
       },
       {
-        "texto": "Sensibilidade, bom gosto e técnica. Cada detalhe foi pensado com um cuidado que se sente todos os dias.",
-        "nome": "Eduardo Lima",
-        "papel": "Cliente residencial"
+        "texto": "Ficamos muito satisfeitos com o resultado do projeto. O loft ficou bonito, funcional e pensado para valorizar cada metro quadrado, tornando o imóvel muito mais atrativo para locação por temporada. O cuidado com os detalhes e a otimização dos espaços fizeram toda a diferença. Recomendo o trabalho da Arquiartes!",
+        "nome": "Mariana e Marcelo",
+        "papel": "Investidores"
+      },
+      {
+        "texto": "Excelente trabalho! A reforma transformou completamente o meu estúdio de beleza. O ambiente ficou mais moderno, acolhedor e funcional, proporcionando uma experiência muito melhor para os clientes. Fiquei extremamente satisfeita com o resultado!",
+        "nome": "Sandra",
+        "papel": "Estúdio de beleza"
       }
     ]
   },
