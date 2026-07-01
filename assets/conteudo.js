@@ -6,7 +6,7 @@ window.SITE_CONTENT = {
     "text": "Projetos contemporâneos e integrados à natureza, pensados para transformar espaços e vidas.",
     "btnPrimary": "Solicitar orçamento",
     "btnSecondary": "Ver projetos",
-    "name": "Laísa Wermelinger",
+    "name": "Laisa Wermelinger",
     "role": "Arquiteta & Paisagista",
     "photo": "assets/img/laisa.jpg"
   },

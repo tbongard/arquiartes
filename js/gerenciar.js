@@ -13,7 +13,7 @@
      leve (as senhas ficam no código). Para uso interno.
      ============================================================ */
   var USUARIOS = [
-    { usuario: 'laisa', senha: 'arquiartes', papel: 'editor', nome: 'Laísa' },
+    { usuario: 'laisa', senha: 'arquiartes', papel: 'editor', nome: 'Laisa' },
     { usuario: 'admin', senha: 'bomjardim',  papel: 'admin',  nome: 'Administrador' }
   ];
 
