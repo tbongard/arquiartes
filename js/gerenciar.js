@@ -246,7 +246,8 @@
   function ghToken() { try { return localStorage.getItem(GH_TOKEN_KEY) || ''; } catch (e) { return ''; } }
   function b64utf8(str) { return btoa(unescape(encodeURIComponent(str))); }
 
-  function publicarOnline() {
+  /* Publica: sobe as fotos novas como arquivos separados e depois o conteudo.js (leve) */
+  async function publicarOnline() {
     var cfg = ghConfig();
     var token = ghToken();
     if (!cfg.repo || !token) {
@@ -256,38 +257,70 @@
     }
     var branch = cfg.branch || 'main';
     var path = cfg.path || 'assets/conteudo.js';
-    var apiBase = 'https://api.github.com/repos/' + cfg.repo + '/contents/' + path;
     var head = { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json' };
-    var texto = gerarConteudoJs();
 
-    if (texto.length > 950000) {
-      toast('Conteúdo grande demais (fotos pesadas). Use menos/ menores imagens.', true);
-      return;
+    try {
+      // 1) sobe cada imagem embutida (data URL) como um arquivo e troca pelo caminho
+      var pendentes = coletarImagensBase64(content);
+      for (var i = 0; i < pendentes.length; i++) {
+        var p = pendentes[i];
+        toast('Enviando foto ' + (i + 1) + ' de ' + pendentes.length + '...');
+        var nome = await ghCommitBinario(cfg, branch, head, p.b64, p.ext);
+        p.obj[p.key] = nome;
+        salvarRascunho(true); // guarda o caminho já publicado (evita reenviar)
+      }
+      // 2) sobe o conteudo.js (agora leve, só com os caminhos das fotos)
+      toast('Publicando...');
+      await ghCommitTexto(cfg, branch, head, path, gerarConteudoJs());
+      salvarRascunho(true);
+      toast('✓ Publicado! O site atualiza em ~1 minuto.');
+    } catch (e) {
+      toast('Falha ao publicar: ' + (e && e.message ? e.message : e), true);
     }
-    toast('Publicando...');
-    // 1) pega o sha atual (se existir)
-    fetch(apiBase + '?ref=' + encodeURIComponent(branch), { headers: head })
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (atual) {
-        var body = {
-          message: 'Atualiza conteúdo do site (painel ARQUIARTES)',
-          content: b64utf8(texto),
-          branch: branch
-        };
-        if (atual && atual.sha) body.sha = atual.sha;
-        return fetch(apiBase, { method: 'PUT', headers: head, body: JSON.stringify(body) });
-      })
-      .then(function (r) {
-        if (r.ok) {
-          salvarRascunho(true);
-          toast('✓ Publicado! O site atualiza em ~1 minuto.');
-        } else {
-          return r.json().then(function (e) {
-            toast('Falha ao publicar: ' + (e.message || r.status), true);
-          });
+  }
+
+  /* Encontra todos os valores que são imagens embutidas (data URL) no conteúdo */
+  function coletarImagensBase64(raiz) {
+    var achados = [];
+    (function walk(node) {
+      if (!node || typeof node !== 'object') return;
+      Object.keys(node).forEach(function (k) {
+        var v = node[k];
+        if (typeof v === 'string' && v.indexOf('data:image') === 0) {
+          var m = /^data:(image\/[\w+.-]+);base64,([\s\S]*)$/.exec(v);
+          if (m) {
+            var ext = m[1].indexOf('png') >= 0 ? 'png' : (m[1].indexOf('webp') >= 0 ? 'webp' : 'jpg');
+            achados.push({ obj: node, key: k, b64: m[2], ext: ext });
+          }
+        } else if (v && typeof v === 'object') {
+          walk(v);
         }
-      })
-      .catch(function () { toast('Sem conexão ou token inválido.', true); });
+      });
+    })(raiz);
+    return achados;
+  }
+
+  /* Sobe uma imagem como arquivo no repositório e devolve o caminho */
+  async function ghCommitBinario(cfg, branch, head, b64, ext) {
+    var nome = 'assets/img/foto-' + Date.now() + '-' + Math.floor(Math.random() * 1e6) + '.' + ext;
+    var url = 'https://api.github.com/repos/' + cfg.repo + '/contents/' + nome;
+    var r = await fetch(url, { method: 'PUT', headers: head, body: JSON.stringify({
+      message: 'Adiciona imagem (painel ARQUIARTES)', content: b64, branch: branch
+    }) });
+    if (!r.ok) { var e = await r.json().catch(function () { return {}; }); throw new Error(e.message || ('HTTP ' + r.status)); }
+    return nome;
+  }
+
+  /* Sobe/atualiza um arquivo de texto (conteudo.js) */
+  async function ghCommitTexto(cfg, branch, head, path, texto) {
+    var base = 'https://api.github.com/repos/' + cfg.repo + '/contents/' + path;
+    var sha = null;
+    var g = await fetch(base + '?ref=' + encodeURIComponent(branch), { headers: head });
+    if (g.ok) { var j = await g.json(); sha = j.sha; }
+    var body = { message: 'Atualiza conteúdo do site (painel ARQUIARTES)', content: b64utf8(texto), branch: branch };
+    if (sha) body.sha = sha;
+    var r = await fetch(base, { method: 'PUT', headers: head, body: JSON.stringify(body) });
+    if (!r.ok) { var e = await r.json().catch(function () { return {}; }); throw new Error(e.message || ('HTTP ' + r.status)); }
   }
 
   function ghTestarConexao() {
