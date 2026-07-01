@@ -428,6 +428,56 @@ p { color: #4f4a42; }
 }
 
 /* ============================================================
+   ESSÊNCIA (missão · visão · valores)
+   ============================================================ */
+.essencia { background: var(--beige-light); }
+.essencia__mv { align-items: stretch; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+.mv-card {
+  background: var(--white);
+  border: 1px solid var(--gray-line);
+  border-top: 2px solid var(--gold);
+  border-radius: var(--radius);
+  padding: clamp(1.6rem, 3vw, 2.4rem);
+}
+.mv-card__label {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.9rem;
+}
+.mv-card p { color: #4f4a42; font-size: 1.02rem; }
+
+.valores__title {
+  display: inline-block;
+  font-size: 0.78rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gray-soft);
+  margin-bottom: 1.1rem;
+}
+.valores__grid { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+.valor-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: var(--white);
+  border: 1px solid var(--gray-line);
+  border-radius: 40px;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
+  color: var(--green-deep);
+}
+.valor-chip::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+/* ============================================================
    SERVIÇOS
    ============================================================ */
 .servicos { background: var(--white); }

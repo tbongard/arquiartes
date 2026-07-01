@@ -45,6 +45,16 @@
       { p: 'sobre.ano', l: 'Ano do selo "Desde"', t: 'text' },
       { p: 'sobre.imagem', l: 'Imagem da seção', t: 'image' }
     ]},
+    { id: 'essencia', label: 'Essência', hint: 'missão·visão·valores', fields: [
+      { p: 'essencia.eyebrow', l: 'Selo', t: 'text' },
+      { p: 'essencia.title', l: 'Título', t: 'textarea' },
+      { p: 'essencia.missao', l: 'Missão', t: 'textarea' },
+      { p: 'essencia.visao', l: 'Visão', t: 'textarea' },
+      { p: 'essencia.valores', l: 'Valores', t: 'items', addable: true,
+        addLabel: '+ Adicionar valor',
+        novo: { nome: 'Novo valor' },
+        item: [ { k: 'nome', l: 'Valor', t: 'text' } ] }
+    ]},
     { id: 'servicos', label: 'Serviços', hint: '6 itens', fields: [
       { p: 'servicos.eyebrow', l: 'Selo', t: 'text' },
       { p: 'servicos.title', l: 'Título', t: 'textarea' },

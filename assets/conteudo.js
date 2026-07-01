@@ -164,6 +164,20 @@ window.SITE_CONTENT = {
     "horario": "Seg. a sex., das 9h às 18h",
     "email": ""
   },
+  "essencia": {
+    "eyebrow": "Nossa essência",
+    "title": "Missão, visão e valores.",
+    "missao": "Desenvolver projetos autorais e personalizados que traduzem a essência de cada cliente, integrando arquitetura, paisagismo e natureza com sensibilidade e excelência.",
+    "visao": "Ser referência em arquitetura e paisagismo contemporâneo, reconhecida pela criação de espaços que inspiram e valorizam a vida.",
+    "valores": [
+      { "nome": "Sustentabilidade" },
+      { "nome": "Empatia" },
+      { "nome": "Excelência" },
+      { "nome": "Criatividade" },
+      { "nome": "Comprometimento" },
+      { "nome": "Bem-estar" }
+    ]
+  },
   "footer": {
     "sobre": "Projetos autorais que unem arquitetura contemporânea, paisagismo e sofisticação atemporal."
   }

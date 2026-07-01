@@ -68,10 +68,25 @@
 
     // Seções dinâmicas: reconstroem com a quantidade de itens existente
     renderServices(c);
+    renderValores(c);
     renderPortfolio(c);
     renderDiferenciais(c);
     renderStats(c);
     renderDepoimentos(c);
+  }
+
+  /* ---------- Valores (chips dinâmicos) ---------- */
+  function renderValores(c) {
+    if (!c || !c.essencia || !Array.isArray(c.essencia.valores)) return;
+    var grid = document.getElementById('valoresGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    c.essencia.valores.forEach(function (item) {
+      var chip = document.createElement('span');
+      chip.className = 'valor-chip';
+      chip.textContent = (item && item.nome) ? item.nome : String(item || '');
+      grid.appendChild(chip);
+    });
   }
 
   /* ---------- Estatísticas (números animados, dinâmicos) ---------- */
