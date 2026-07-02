@@ -32,7 +32,7 @@
       { p: 'hero.text', l: 'Parágrafo de apresentação', t: 'textarea' },
       { p: 'hero.name', l: 'Nome (sobre a foto)', t: 'text' },
       { p: 'hero.role', l: 'Função/legenda (sobre a foto)', t: 'text' },
-      { p: 'hero.photo', l: 'Foto principal (retrato)', t: 'image' },
+      { p: 'hero.photo', l: 'Foto principal (retrato)', t: 'image', aspect: 0.72 },
       { p: 'hero.btnPrimary', l: 'Texto do botão principal', t: 'text' },
       { p: 'hero.btnSecondary', l: 'Texto do botão secundário', t: 'text' }
     ]},
@@ -43,7 +43,7 @@
       { p: 'sobre.p2', l: 'Parágrafo 2', t: 'textarea' },
       { p: 'sobre.itens', l: 'Lista de destaques', t: 'list' },
       { p: 'sobre.ano', l: 'Ano do selo "Desde"', t: 'text' },
-      { p: 'sobre.imagem', l: 'Imagem da seção', t: 'image' }
+      { p: 'sobre.imagem', l: 'Imagem da seção', t: 'image', aspect: 0.75 }
     ]},
     { id: 'essencia', label: 'Essência', hint: 'missão·visão·valores', fields: [
       { p: 'essencia.eyebrow', l: 'Selo', t: 'text' },
@@ -87,7 +87,7 @@
         item: [
           { k: 'categoria', l: 'Categoria', t: 'text' },
           { k: 'titulo', l: 'Nome do projeto', t: 'text' },
-          { k: 'imagem', l: 'Foto de capa', t: 'image', full: true },
+          { k: 'imagem', l: 'Foto de capa', t: 'image', full: true, aspect: 1.4 },
           { k: 'galeria', l: 'Mais fotos do projeto (galeria)', t: 'galeria', full: true }
         ]}
     ]},
@@ -197,6 +197,97 @@
       img.onerror = function () { URL.revokeObjectURL(url); reject(new Error('Falha ao ler imagem')); };
       img.src = url;
     });
+  }
+
+  /* Editor de recorte: arrastar + zoom, com proporção fixa. Chama onDone(dataUrl). */
+  function abrirCropper(file, aspect, onDone) {
+    if (!file.type || file.type.indexOf('image') !== 0) { toast('Arquivo não é imagem.', true); return; }
+    aspect = aspect || 1.4; // largura / altura
+    var img = new Image();
+    var url = URL.createObjectURL(file);
+    img.onload = function () {
+      var maxW = Math.min(window.innerWidth * 0.82, 560);
+      var maxH = window.innerHeight * 0.6;
+      var vw, vh;
+      if (aspect >= 1) { vw = maxW; vh = maxW / aspect; if (vh > maxH) { vh = maxH; vw = maxH * aspect; } }
+      else { vh = maxH; vw = maxH * aspect; if (vw > maxW) { vw = maxW; vh = maxW / aspect; } }
+      vw = Math.round(vw); vh = Math.round(vh);
+
+      var overlay = el('div', { class: 'cropper' });
+      var view = el('div', { class: 'cropper__view' });
+      view.style.width = vw + 'px'; view.style.height = vh + 'px';
+      var pic = document.createElement('img'); pic.src = url; pic.alt = '';
+      view.appendChild(pic);
+      overlay.appendChild(view);
+
+      var bar = el('div', { class: 'cropper__bar' });
+      bar.appendChild(el('span', { text: 'Zoom' }));
+      var zoom = document.createElement('input'); zoom.type = 'range'; zoom.min = '1'; zoom.max = '3'; zoom.step = '0.01'; zoom.value = '1';
+      bar.appendChild(zoom);
+      var btnOk = el('button', { class: 'btn primary', type: 'button', text: 'Aplicar' });
+      var btnCancel = el('button', { class: 'btn ghost', type: 'button', text: 'Cancelar' });
+      bar.appendChild(btnOk); bar.appendChild(btnCancel);
+      overlay.appendChild(bar);
+      overlay.appendChild(el('div', { class: 'cropper__hint', text: 'Arraste a imagem para enquadrar e use o zoom.' }));
+      document.body.appendChild(overlay);
+
+      var iw = img.naturalWidth, ih = img.naturalHeight;
+      var scaleCover = Math.max(vw / iw, vh / ih);
+      var z = 1, tx = 0, ty = 0;
+      function dw() { return iw * scaleCover * z; }
+      function dh() { return ih * scaleCover * z; }
+      function render() {
+        tx = Math.min(0, Math.max(vw - dw(), tx));
+        ty = Math.min(0, Math.max(vh - dh(), ty));
+        pic.style.width = dw() + 'px'; pic.style.height = dh() + 'px';
+        pic.style.left = tx + 'px'; pic.style.top = ty + 'px';
+      }
+      tx = (vw - dw()) / 2; ty = (vh - dh()) / 2; render();
+
+      zoom.addEventListener('input', function () {
+        var cx = vw / 2, cy = vh / 2, oldz = z;
+        z = parseFloat(zoom.value);
+        tx = cx - (cx - tx) * (z / oldz);
+        ty = cy - (cy - ty) * (z / oldz);
+        render();
+      });
+      view.addEventListener('wheel', function (e) {
+        e.preventDefault();
+        var nz = Math.min(3, Math.max(1, z * (e.deltaY < 0 ? 1.08 : 0.92)));
+        zoom.value = nz; zoom.dispatchEvent(new Event('input'));
+      }, { passive: false });
+
+      var dragging = false, sx = 0, sy = 0, stx = 0, sty = 0;
+      view.addEventListener('pointerdown', function (e) {
+        dragging = true; view.classList.add('dragging');
+        sx = e.clientX; sy = e.clientY; stx = tx; sty = ty;
+        try { view.setPointerCapture(e.pointerId); } catch (err) {}
+      });
+      view.addEventListener('pointermove', function (e) {
+        if (!dragging) return;
+        tx = stx + (e.clientX - sx); ty = sty + (e.clientY - sy); render();
+      });
+      view.addEventListener('pointerup', function () { dragging = false; view.classList.remove('dragging'); });
+
+      function fechar() { URL.revokeObjectURL(url); overlay.remove(); }
+      btnCancel.addEventListener('click', fechar);
+      btnOk.addEventListener('click', function () {
+        var cw, ch;
+        if (aspect >= 1) { cw = 1400; ch = Math.round(1400 / aspect); }
+        else { ch = 1400; cw = Math.round(1400 * aspect); }
+        var k = cw / vw;
+        var canvas = document.createElement('canvas');
+        canvas.width = cw; canvas.height = ch;
+        var ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, cw, ch);
+        ctx.drawImage(img, 0, 0, iw, ih, tx * k, ty * k, dw() * k, dh() * k);
+        var dataUrl = canvas.toDataURL('image/jpeg', 0.85);
+        fechar();
+        onDone(dataUrl);
+      });
+    };
+    img.onerror = function () { URL.revokeObjectURL(url); toast('Não foi possível ler a imagem.', true); };
+    img.src = url;
   }
 
   /* ============================================================
@@ -472,14 +563,14 @@
     });
     file.addEventListener('change', function () {
       var f0 = file.files[0];
+      file.value = '';
       if (!f0) return;
-      compressImage(f0, 1500, 0.82).then(function (dataUrl) {
+      abrirCropper(f0, f.aspect || 1.4, function (dataUrl) {
         setPath(content, path, dataUrl);
         pintar(dataUrl);
         agendarSalvar();
-        toast('Foto carregada.');
-      }).catch(function () { toast('Não foi possível processar a imagem.', true); });
-      file.value = '';
+        toast('Foto ajustada.');
+      });
     });
 
     var actions = el('div', { class: 'imgctrl__actions' });
