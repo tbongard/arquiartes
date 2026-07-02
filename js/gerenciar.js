@@ -83,11 +83,12 @@
       { p: 'portfolio.lead', l: 'Texto de apoio', t: 'textarea' },
       { p: 'portfolio.itens', l: 'Projetos', t: 'items', addable: true,
         addLabel: '+ Adicionar projeto',
-        novo: { categoria: 'Categoria', titulo: 'Novo projeto', imagem: '' },
+        novo: { categoria: 'Categoria', titulo: 'Novo projeto', imagem: '', galeria: [] },
         item: [
           { k: 'categoria', l: 'Categoria', t: 'text' },
           { k: 'titulo', l: 'Nome do projeto', t: 'text' },
-          { k: 'imagem', l: 'Foto do projeto', t: 'image', full: true }
+          { k: 'imagem', l: 'Foto de capa', t: 'image', full: true },
+          { k: 'galeria', l: 'Mais fotos do projeto (galeria)', t: 'galeria', full: true }
         ]}
     ]},
     { id: 'diferenciais', label: 'Diferenciais', hint: 'e números', fields: [
@@ -418,6 +419,7 @@
 
   function renderField(path, f, value) {
     if (f.t === 'image') return renderImage(path, f, value);
+    if (f.t === 'galeria') return renderGaleria(path, f, value);
 
     var wrap = el('div', { class: 'field' + (f.full ? ' full' : '') });
     wrap.appendChild(el('label', { text: f.l }));
@@ -489,6 +491,52 @@
     ctrl.appendChild(preview);
     ctrl.appendChild(actions);
     wrap.appendChild(ctrl);
+    return wrap;
+  }
+
+  function renderGaleria(path, f, value) {
+    var wrap = el('div', { class: 'field' + (f.full ? ' full' : '') });
+    wrap.appendChild(el('label', { text: f.l }));
+    var arr = Array.isArray(value) ? value : [];
+
+    var grid = el('div', { class: 'galeria-grid' });
+    arr.forEach(function (foto, i) {
+      var thumb = el('div', { class: 'galeria-thumb' });
+      thumb.style.backgroundImage = 'url("' + foto + '")';
+      var rm = el('button', { class: 'galeria-rm', type: 'button', 'aria-label': 'Remover foto', text: '×' });
+      rm.addEventListener('click', function () {
+        var a = getPath(content, path) || [];
+        a.splice(i, 1);
+        setPath(content, path, a);
+        salvarRascunho(true);
+        renderForm(secaoAtiva);
+      });
+      thumb.appendChild(rm);
+      grid.appendChild(thumb);
+    });
+    wrap.appendChild(grid);
+
+    var file = el('input', { type: 'file', accept: 'image/*', multiple: 'multiple' });
+    file.style.display = 'none';
+    var btn = el('button', { class: 'btn small', type: 'button', text: '+ Adicionar foto(s)' });
+    btn.addEventListener('click', function () { file.click(); });
+    file.addEventListener('change', function () {
+      var arquivos = [].slice.call(file.files);
+      file.value = '';
+      if (!arquivos.length) return;
+      toast('Processando ' + arquivos.length + ' foto(s)...');
+      var a = getPath(content, path) || [];
+      var pend = arquivos.length;
+      arquivos.forEach(function (f0) {
+        compressImage(f0, 1500, 0.82).then(function (dataUrl) {
+          a.push(dataUrl); setPath(content, path, a); salvarRascunho(true);
+          if (--pend === 0) renderForm(secaoAtiva);
+        }).catch(function () { if (--pend === 0) renderForm(secaoAtiva); });
+      });
+    });
+    wrap.appendChild(btn);
+    wrap.appendChild(file);
+    if (f.hint) wrap.appendChild(el('p', { class: 'hint', text: f.hint }));
     return wrap;
   }
 

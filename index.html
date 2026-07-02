@@ -85,6 +85,14 @@
       </a>
     </section>
 
+    <!-- ====================== SHOWCASE (carrossel de projetos) ====================== -->
+    <section class="showcase" id="showcase" aria-label="Projetos em destaque" hidden>
+      <div class="showcase__track" id="showcaseTrack"></div>
+      <button class="showcase__nav showcase__nav--prev" id="showcasePrev" type="button" aria-label="Anterior">&#8249;</button>
+      <button class="showcase__nav showcase__nav--next" id="showcaseNext" type="button" aria-label="Próximo">&#8250;</button>
+      <div class="showcase__dots" id="showcaseDots"></div>
+    </section>
+
     <!-- ====================== SOBRE ====================== -->
     <section class="section sobre" id="sobre">
       <div class="container grid grid--2">
@@ -432,6 +440,18 @@
       </div>
     </div>
   </footer>
+
+  <!-- Visualizador de fotos (lightbox) -->
+  <div class="lightbox" id="lightbox" hidden aria-hidden="true" role="dialog" aria-label="Fotos do projeto">
+    <button class="lightbox__close" id="lightboxClose" type="button" aria-label="Fechar">&times;</button>
+    <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" type="button" aria-label="Foto anterior">&#8249;</button>
+    <figure class="lightbox__stage">
+      <img class="lightbox__img" id="lightboxImg" alt="" />
+      <figcaption class="lightbox__cap" id="lightboxCap"></figcaption>
+    </figure>
+    <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" type="button" aria-label="Próxima foto">&#8250;</button>
+    <div class="lightbox__counter" id="lightboxCounter"></div>
+  </div>
 
   <!-- Botão flutuante WhatsApp -->
   <a data-wa href="https://wa.me/5522991059221" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Fale conosco no WhatsApp">

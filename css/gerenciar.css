@@ -119,6 +119,11 @@ img { display: block; max-width: 100%; }
 .item-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem 1.2rem; }
 .item-grid .field.full { grid-column: 1 / -1; }
 
+/* galeria (várias fotos) */
+.galeria-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 0.7rem; }
+.galeria-thumb { position: relative; width: 90px; height: 90px; border-radius: var(--radius); background: var(--off-white) center/cover no-repeat; border: 1px solid var(--gray-line); }
+.galeria-rm { position: absolute; top: -8px; right: -8px; width: 22px; height: 22px; border-radius: 50%; background: var(--danger); color: #fff; font-size: 1rem; line-height: 1; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0,0,0,0.25); }
+
 /* controle de imagem */
 .imgctrl { display: flex; gap: 1rem; align-items: flex-start; }
 .imgctrl__preview {

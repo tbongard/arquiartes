@@ -70,10 +70,105 @@
     renderServices(c);
     renderValores(c);
     renderPortfolio(c);
+    renderShowcase(c);
     renderDiferenciais(c);
     renderStats(c);
     renderDepoimentos(c);
   }
+
+  /* ---------- Fotos de um projeto (capa + galeria) ---------- */
+  function fotosDoProjeto(p) {
+    var arr = [];
+    if (p && p.imagem) arr.push(p.imagem);
+    if (p && Array.isArray(p.galeria)) p.galeria.forEach(function (f) { if (f) arr.push(f); });
+    return arr;
+  }
+
+  /* ---------- Carrossel de projetos (home) ---------- */
+  function renderShowcase(c) {
+    var sec = document.getElementById('showcase');
+    var track = document.getElementById('showcaseTrack');
+    var dotsWrap = document.getElementById('showcaseDots');
+    if (!sec || !track || !dotsWrap) return;
+
+    var projetos = (c && c.portfolio && Array.isArray(c.portfolio.itens)) ? c.portfolio.itens : [];
+    var comCapa = projetos.filter(function (p) { return p && p.imagem; });
+    if (comCapa.length === 0) { sec.hidden = true; return; }
+    sec.hidden = false;
+
+    track.innerHTML = '';
+    dotsWrap.innerHTML = '';
+    var slides = [], dots = [], atual = 0, timer = null;
+
+    comCapa.forEach(function (p, i) {
+      var slide = document.createElement('div');
+      slide.className = 'showcase__slide' + (i === 0 ? ' is-active' : '');
+      slide.style.backgroundImage = 'url("' + p.imagem + '")';
+      var cap = document.createElement('div');
+      cap.className = 'showcase__cap';
+      var cat = document.createElement('span'); cat.className = 'showcase__cat'; cat.textContent = p.categoria || '';
+      var tit = document.createElement('h3'); tit.className = 'showcase__title'; tit.textContent = p.titulo || '';
+      var hint = document.createElement('span'); hint.className = 'showcase__hint'; hint.textContent = 'Ver fotos';
+      cap.appendChild(cat); cap.appendChild(tit); cap.appendChild(hint);
+      slide.appendChild(cap);
+      slide.addEventListener('click', function () { openLightbox(fotosDoProjeto(p), 0, p.titulo); });
+      track.appendChild(slide);
+      slides.push(slide);
+
+      var dot = document.createElement('span');
+      dot.className = 'showcase__dot' + (i === 0 ? ' is-active' : '');
+      dot.addEventListener('click', function () { mostrar(i); reiniciar(); });
+      dotsWrap.appendChild(dot);
+      dots.push(dot);
+    });
+
+    function mostrar(idx) {
+      atual = (idx + slides.length) % slides.length;
+      slides.forEach(function (s, j) { s.classList.toggle('is-active', j === atual); });
+      dots.forEach(function (d, j) { d.classList.toggle('is-active', j === atual); });
+    }
+    function reiniciar() {
+      if (timer) clearInterval(timer);
+      if (slides.length > 1) timer = setInterval(function () { mostrar(atual + 1); }, 3000);
+    }
+    document.getElementById('showcaseNext').onclick = function () { mostrar(atual + 1); reiniciar(); };
+    document.getElementById('showcasePrev').onclick = function () { mostrar(atual - 1); reiniciar(); };
+    sec.onmouseenter = function () { if (timer) clearInterval(timer); };
+    sec.onmouseleave = reiniciar;
+    reiniciar();
+  }
+
+  /* ---------- Lightbox (visualizador de fotos) ---------- */
+  var lbFotos = [], lbIdx = 0, lbTitulo = '';
+  function openLightbox(fotos, idx, titulo) {
+    if (!fotos || !fotos.length) return;
+    lbFotos = fotos; lbIdx = idx || 0; lbTitulo = titulo || '';
+    var lb = document.getElementById('lightbox');
+    if (!lb) return;
+    lb.hidden = false; lb.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('no-scroll');
+    atualizarLightbox();
+  }
+  function atualizarLightbox() {
+    var img = document.getElementById('lightboxImg');
+    if (!img) return;
+    img.src = lbFotos[lbIdx];
+    img.alt = lbTitulo + ' — foto ' + (lbIdx + 1);
+    document.getElementById('lightboxCap').textContent = lbTitulo;
+    document.getElementById('lightboxCounter').textContent = (lbIdx + 1) + ' / ' + lbFotos.length;
+    var multi = lbFotos.length > 1;
+    document.getElementById('lightboxPrev').style.display = multi ? 'flex' : 'none';
+    document.getElementById('lightboxNext').style.display = multi ? 'flex' : 'none';
+    document.getElementById('lightboxCounter').style.display = multi ? 'block' : 'none';
+  }
+  function fecharLightbox() {
+    var lb = document.getElementById('lightbox');
+    if (!lb) return;
+    lb.hidden = true; lb.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('no-scroll');
+  }
+  function lbPrev() { lbIdx = (lbIdx - 1 + lbFotos.length) % lbFotos.length; atualizarLightbox(); }
+  function lbNext() { lbIdx = (lbIdx + 1) % lbFotos.length; atualizarLightbox(); }
 
   /* ---------- Valores (chips dinâmicos) ---------- */
   function renderValores(c) {
@@ -174,6 +269,7 @@
       tit.textContent = item.titulo || '';
       cap.appendChild(cat); cap.appendChild(tit);
       fig.appendChild(ph); fig.appendChild(cap);
+      fig.addEventListener('click', function () { openLightbox(fotosDoProjeto(item), 0, item.titulo); });
       grid.appendChild(fig);
     });
   }
@@ -230,6 +326,22 @@
     }
   } catch (e) { /* ignora */ }
   applyContent(CONTENT);
+
+  /* ---------- Controles do lightbox (uma vez) ---------- */
+  (function ligarLightbox() {
+    var lb = document.getElementById('lightbox');
+    if (!lb) return;
+    document.getElementById('lightboxClose').onclick = fecharLightbox;
+    document.getElementById('lightboxPrev').onclick = lbPrev;
+    document.getElementById('lightboxNext').onclick = lbNext;
+    lb.addEventListener('click', function (e) { if (e.target === lb || e.target.classList.contains('lightbox__stage')) fecharLightbox(); });
+    document.addEventListener('keydown', function (e) {
+      if (lb.hidden) return;
+      if (e.key === 'Escape') fecharLightbox();
+      else if (e.key === 'ArrowLeft') lbPrev();
+      else if (e.key === 'ArrowRight') lbNext();
+    });
+  })();
 
   /* ---------- Cabeçalho: muda ao rolar ---------- */
   var header = document.getElementById('header');
