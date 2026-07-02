@@ -347,23 +347,45 @@
       ativarSecao('publicacao');
       return;
     }
+    var repo = cfg.repo;
     var branch = cfg.branch || 'main';
     var path = cfg.path || 'assets/conteudo.js';
     var head = { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json' };
 
     try {
-      // 1) sobe cada imagem embutida (data URL) como um arquivo e troca pelo caminho
+      var arquivos = []; // { path, sha } dos blobs que entram no commit
+
+      // 1) cria um blob para cada foto nova (data URL) e troca pelo caminho
       var pendentes = coletarImagensBase64(content);
       for (var i = 0; i < pendentes.length; i++) {
         var p = pendentes[i];
         toast('Enviando foto ' + (i + 1) + ' de ' + pendentes.length + '...');
-        var nome = await ghCommitBinario(cfg, branch, head, p.b64, p.ext);
+        var blob = await ghApi(head, repo, 'POST', '/git/blobs', { content: p.b64, encoding: 'base64' });
+        var nome = 'assets/img/foto-' + Date.now() + '-' + Math.floor(Math.random() * 1e6) + '.' + p.ext;
+        arquivos.push({ path: nome, sha: blob.sha });
         p.obj[p.key] = nome;
-        salvarRascunho(true); // guarda o caminho já publicado (evita reenviar)
       }
-      // 2) sobe o conteudo.js (agora leve, só com os caminhos das fotos)
+      salvarRascunho(true);
+
+      // 2) blob do conteudo.js (leve, só com os caminhos)
       toast('Publicando...');
-      await ghCommitTexto(cfg, branch, head, path, gerarConteudoJs());
+      var blobTxt = await ghApi(head, repo, 'POST', '/git/blobs', { content: b64utf8(gerarConteudoJs()), encoding: 'base64' });
+      arquivos.push({ path: path, sha: blobTxt.sha });
+
+      // 3) monta UM commit único com todos os arquivos (evita entupir a fila de deploys)
+      var ref = await ghApi(head, repo, 'GET', '/git/ref/heads/' + encodeURIComponent(branch));
+      var baseSha = ref.object.sha;
+      var baseCommit = await ghApi(head, repo, 'GET', '/git/commits/' + baseSha);
+      var arvore = await ghApi(head, repo, 'POST', '/git/trees', {
+        base_tree: baseCommit.tree.sha,
+        tree: arquivos.map(function (f) { return { path: f.path, mode: '100644', type: 'blob', sha: f.sha }; })
+      });
+      var commit = await ghApi(head, repo, 'POST', '/git/commits', {
+        message: 'Atualiza site (painel ARQUIARTES): ' + pendentes.length + ' foto(s) + conteudo',
+        tree: arvore.sha, parents: [baseSha]
+      });
+      await ghApi(head, repo, 'PATCH', '/git/refs/heads/' + encodeURIComponent(branch), { sha: commit.sha });
+
       salvarRascunho(true);
       toast('✓ Publicado! O site atualiza em ~1 minuto.');
     } catch (e) {
@@ -392,27 +414,14 @@
     return achados;
   }
 
-  /* Sobe uma imagem como arquivo no repositório e devolve o caminho */
-  async function ghCommitBinario(cfg, branch, head, b64, ext) {
-    var nome = 'assets/img/foto-' + Date.now() + '-' + Math.floor(Math.random() * 1e6) + '.' + ext;
-    var url = 'https://api.github.com/repos/' + cfg.repo + '/contents/' + nome;
-    var r = await fetch(url, { method: 'PUT', headers: head, body: JSON.stringify({
-      message: 'Adiciona imagem (painel ARQUIARTES)', content: b64, branch: branch
-    }) });
-    if (!r.ok) { var e = await r.json().catch(function () { return {}; }); throw new Error(e.message || ('HTTP ' + r.status)); }
-    return nome;
-  }
-
-  /* Sobe/atualiza um arquivo de texto (conteudo.js) */
-  async function ghCommitTexto(cfg, branch, head, path, texto) {
-    var base = 'https://api.github.com/repos/' + cfg.repo + '/contents/' + path;
-    var sha = null;
-    var g = await fetch(base + '?ref=' + encodeURIComponent(branch), { headers: head });
-    if (g.ok) { var j = await g.json(); sha = j.sha; }
-    var body = { message: 'Atualiza conteúdo do site (painel ARQUIARTES)', content: b64utf8(texto), branch: branch };
-    if (sha) body.sha = sha;
-    var r = await fetch(base, { method: 'PUT', headers: head, body: JSON.stringify(body) });
-    if (!r.ok) { var e = await r.json().catch(function () { return {}; }); throw new Error(e.message || ('HTTP ' + r.status)); }
+  /* Chamada à API do GitHub (lança erro com mensagem em caso de falha) */
+  async function ghApi(head, repo, method, endpoint, body) {
+    var opt = { method: method, headers: head };
+    if (body) opt.body = JSON.stringify(body);
+    var r = await fetch('https://api.github.com/repos/' + repo + endpoint, opt);
+    var j = await r.json().catch(function () { return {}; });
+    if (!r.ok) throw new Error((j && j.message) ? j.message : ('HTTP ' + r.status));
+    return j;
   }
 
   function ghTestarConexao() {
