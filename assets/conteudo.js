@@ -62,17 +62,50 @@ window.SITE_CONTENT = {
       {
         "categoria": "Comercial",
         "titulo": "Estúdio SH",
-        "imagem": "assets/img/foto-1782932774316-948509.jpg"
+        "imagem": "assets/img/foto-1783348252733-455263.jpg",
+        "galeria": [
+          "assets/img/foto-1783348253753-221145.jpg",
+          "assets/img/foto-1783348254762-333508.jpg",
+          "assets/img/foto-1783348255764-253227.jpg",
+          "assets/img/foto-1783348256700-333329.jpg",
+          "assets/img/foto-1783348257707-407265.jpg",
+          "assets/img/foto-1783348258682-991919.jpg",
+          "assets/img/foto-1783348259648-728769.jpg",
+          "assets/img/foto-1783348260846-875547.jpg",
+          "assets/img/foto-1783348261886-301351.jpg",
+          "assets/img/foto-1783348262995-593083.jpg",
+          "assets/img/foto-1783348264047-729839.jpg"
+        ]
       },
       {
         "categoria": "Paisagismo",
         "titulo": "Jardins DG",
-        "imagem": "assets/img/foto-1782932775738-764060.jpg"
-      },
-      {
-        "categoria": "Comercial",
-        "titulo": "Estúdio SH",
-        "imagem": "assets/img/foto-1782932778842-828918.jpg"
+        "imagem": "assets/img/foto-1782932775738-764060.jpg",
+        "galeria": [
+          "assets/img/foto-1783348265214-289203.jpg",
+          "assets/img/foto-1783348266413-952191.jpg",
+          "assets/img/foto-1783348266967-16038.jpg",
+          "assets/img/foto-1783348267703-720395.jpg",
+          "assets/img/foto-1783348268764-944853.jpg",
+          "assets/img/foto-1783348269819-696606.jpg",
+          "assets/img/foto-1783348270864-327039.jpg",
+          "assets/img/foto-1783348271878-537731.jpg",
+          "assets/img/foto-1783348272972-25081.jpg",
+          "assets/img/foto-1783348274067-428362.jpg",
+          "assets/img/foto-1783348275245-846760.jpg",
+          "assets/img/foto-1783348276458-985372.jpg",
+          "assets/img/foto-1783348277641-406025.jpg",
+          "assets/img/foto-1783348278201-921834.jpg",
+          "assets/img/foto-1783348279159-208108.jpg",
+          "assets/img/foto-1783348279924-625317.jpg",
+          "assets/img/foto-1783348281060-627022.jpg",
+          "assets/img/foto-1783348282171-206742.jpg",
+          "assets/img/foto-1783348283193-77124.jpg",
+          "assets/img/foto-1783348284341-101244.jpg",
+          "assets/img/foto-1783348285487-339859.jpg",
+          "assets/img/foto-1783348286196-644932.jpg",
+          "assets/img/foto-1783348287278-828878.jpg"
+        ]
       },
       {
         "categoria": "Interiores",
@@ -80,34 +113,32 @@ window.SITE_CONTENT = {
         "imagem": "assets/img/foto-1782932780865-471649.jpg"
       },
       {
-        "categoria": "Comercial",
-        "titulo": "Estúdio SH",
-        "imagem": "assets/img/foto-1782932782312-154368.jpg"
-      },
-      {
         "categoria": "Residencial",
         "titulo": "Área Gourmet AM",
-        "imagem": "assets/img/foto-1782932786355-60457.jpg"
+        "imagem": "assets/img/foto-1782932791503-377116.jpg",
+        "galeria": [
+          "assets/img/foto-1783348288150-358573.jpg",
+          "assets/img/foto-1783348288621-976786.jpg",
+          "assets/img/foto-1783348289579-584083.jpg",
+          "assets/img/foto-1783348290523-841936.jpg",
+          "assets/img/foto-1783348291481-119867.jpg",
+          "assets/img/foto-1783348292201-443917.jpg",
+          "assets/img/foto-1783348293022-401568.jpg",
+          "assets/img/foto-1783348294067-254952.jpg",
+          "assets/img/foto-1783348294868-651364.jpg",
+          "assets/img/foto-1783348296100-999398.jpg",
+          "assets/img/foto-1783348297253-509901.jpg"
+        ]
       },
       {
         "categoria": "Residencial",
-        "titulo": "Área Gourmet AM",
-        "imagem": "assets/img/foto-1782932789338-804333.jpg"
-      },
-      {
-        "categoria": "Residencial",
-        "titulo": "Área Gourmet AM",
-        "imagem": "assets/img/foto-1782932791503-377116.jpg"
-      },
-      {
-        "categoria": "Residencial",
-        "titulo": "Novo projeto",
-        "imagem": "assets/img/foto-1782932793098-31145.jpg"
-      },
-      {
-        "categoria": "Paisagismo/Iluminação",
-        "titulo": "Jardins DG",
-        "imagem": "assets/img/foto-1782932795466-795295.jpg"
+        "titulo": "Nova Residência Sítio",
+        "imagem": "assets/img/foto-1782932793098-31145.jpg",
+        "galeria": [
+          "assets/img/foto-1783348298277-53949.jpg",
+          "assets/img/foto-1783348299228-709050.jpg",
+          "assets/img/foto-1783348300172-380223.jpg"
+        ]
       }
     ]
   },
