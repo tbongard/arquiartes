@@ -118,7 +118,7 @@ window.SITE_CONTENT = {
       {
         "categoria": "Residencial",
         "titulo": "Quarto Farm",
-        "imagem": "assets/img/foto-1782932793098-31145.jpg",
+        "imagem": "assets/img/foto-1783348940772-343998.jpg",
         "galeria": [
           "assets/img/foto-1783348298277-53949.jpg",
           "assets/img/foto-1783348299228-709050.jpg",
