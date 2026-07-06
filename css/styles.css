@@ -160,12 +160,11 @@ p { color: #4f4a42; }
 }
 
 .brand { display: flex; align-items: center; line-height: 1; }
-.brand__logo { height: clamp(46px, 6vw, 56px); width: auto; display: block; transition: height 0.4s var(--ease); }
-.scrolled .brand__logo { height: clamp(40px, 5vw, 46px); }
+.brand__logo { height: clamp(92px, 12vw, 112px); width: auto; display: block; transition: height 0.4s var(--ease); }
+.scrolled .brand__logo { height: clamp(74px, 9vw, 88px); }
 .brand__logo--dark { display: none; }
 .scrolled .brand__logo--light { display: none; }
 .scrolled .brand__logo--dark { display: block; }
-.brand__logo { height: 42px; width: auto; }
 .brand__name {
   font-family: var(--font-serif);
   font-size: 1.5rem;
