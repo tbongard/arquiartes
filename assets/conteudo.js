@@ -61,7 +61,7 @@ window.SITE_CONTENT = {
     "itens": [
       {
         "categoria": "Comercial",
-        "titulo": "Salão SH",
+        "titulo": "Estúdio SH",
         "imagem": "assets/img/foto-1782932774316-948509.jpg"
       },
       {
@@ -71,7 +71,7 @@ window.SITE_CONTENT = {
       },
       {
         "categoria": "Comercial",
-        "titulo": "Salão SH",
+        "titulo": "Estúdio SH",
         "imagem": "assets/img/foto-1782932778842-828918.jpg"
       },
       {
@@ -81,7 +81,7 @@ window.SITE_CONTENT = {
       },
       {
         "categoria": "Comercial",
-        "titulo": "Salão SH",
+        "titulo": "Estúdio SH",
         "imagem": "assets/img/foto-1782932782312-154368.jpg"
       },
       {
