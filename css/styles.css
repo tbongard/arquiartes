@@ -160,8 +160,8 @@ p { color: #4f4a42; }
 }
 
 .brand { display: flex; align-items: center; line-height: 1; }
-.brand__logo { height: clamp(92px, 12vw, 112px); width: auto; display: block; transition: height 0.4s var(--ease); }
-.scrolled .brand__logo { height: clamp(74px, 9vw, 88px); }
+.brand__logo { height: clamp(74px, 9.6vw, 90px); width: auto; display: block; transition: height 0.4s var(--ease); }
+.scrolled .brand__logo { height: clamp(59px, 7.2vw, 70px); }
 .brand__logo--dark { display: none; }
 .scrolled .brand__logo--light { display: none; }
 .scrolled .brand__logo--dark { display: block; }
