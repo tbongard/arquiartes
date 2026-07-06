@@ -106,19 +106,18 @@ window.SITE_CONTENT = {
           "assets/img/foto-1783348288150-358573.jpg",
           "assets/img/foto-1783348288621-976786.jpg",
           "assets/img/foto-1783348289579-584083.jpg",
-          "assets/img/foto-1783348290523-841936.jpg",
           "assets/img/foto-1783348291481-119867.jpg",
           "assets/img/foto-1783348292201-443917.jpg",
           "assets/img/foto-1783348293022-401568.jpg",
           "assets/img/foto-1783348294067-254952.jpg",
           "assets/img/foto-1783348294868-651364.jpg",
-          "assets/img/foto-1783348296100-999398.jpg",
-          "assets/img/foto-1783348297253-509901.jpg"
+          "assets/img/foto-1783348882276-997736.jpg",
+          "assets/img/foto-1783348882784-232190.jpg"
         ]
       },
       {
         "categoria": "Residencial",
-        "titulo": "Nova Residência Sítio",
+        "titulo": "Quarto Farm",
         "imagem": "assets/img/foto-1782932793098-31145.jpg",
         "galeria": [
           "assets/img/foto-1783348298277-53949.jpg",
