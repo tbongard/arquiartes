@@ -159,7 +159,12 @@ p { color: #4f4a42; }
   justify-content: space-between;
 }
 
-.brand { display: flex; flex-direction: column; line-height: 1; }
+.brand { display: flex; align-items: center; line-height: 1; }
+.brand__logo { height: clamp(46px, 6vw, 56px); width: auto; display: block; transition: height 0.4s var(--ease); }
+.scrolled .brand__logo { height: clamp(40px, 5vw, 46px); }
+.brand__logo--dark { display: none; }
+.scrolled .brand__logo--light { display: none; }
+.scrolled .brand__logo--dark { display: block; }
 .brand__logo { height: 42px; width: auto; }
 .brand__name {
   font-family: var(--font-serif);
@@ -777,6 +782,7 @@ body.no-scroll { overflow: hidden; }
   gap: 2.5rem;
   padding-bottom: 3rem;
 }
+.footer__logo { width: 230px; max-width: 72%; height: auto; margin-bottom: 1.2rem; }
 .footer__mark { width: 64px; height: auto; margin-bottom: 1rem; opacity: 0.95; }
 .brand__divider { position: relative; display: block; width: 190px; max-width: 90%; height: 1px; background: var(--gold); margin: 0.75rem 0; }
 .brand__divider::after { content: ''; position: absolute; left: 50%; top: 50%; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); transform: translate(-50%, -50%); }
