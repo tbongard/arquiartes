@@ -26,6 +26,30 @@
   <meta name="twitter:description" content="Projetos contemporâneos e integrados à natureza, pensados para transformar espaços e vidas." />
   <meta name="twitter:image" content="https://arquiartes.net.br/assets/img/og.png" />
 
+  <link rel="canonical" href="https://arquiartes.net.br/" />
+
+  <!-- Dados estruturados (Google entende como negócio local de arquitetura) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": "https://arquiartes.net.br/",
+    "name": "ARQUIARTES — Arquitetura & Paisagismo",
+    "description": "Projetos autorais de arquitetura e paisagismo que unem natureza, sofisticação e arquitetura contemporânea.",
+    "url": "https://arquiartes.net.br/",
+    "image": "https://arquiartes.net.br/assets/img/og.png",
+    "logo": "https://arquiartes.net.br/assets/img/icon-512.png",
+    "telephone": "+55-22-99105-9221",
+    "priceRange": "$$",
+    "areaServed": "Brasil",
+    "founder": { "@type": "Person", "name": "Laisa Wermelinger", "jobTitle": "Arquiteta e Paisagista" },
+    "sameAs": [
+      "https://www.instagram.com/arquiartes.laisawermelinger",
+      "https://www.threads.com/@arquiartes.laisawermelinger"
+    ]
+  }
+  </script>
+
   <!-- Fontes -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -67,7 +91,7 @@
 
       <div class="container hero__grid">
         <div class="hero__photo reveal">
-          <img src="assets/img/laisa.jpg" alt="Laisa Wermelinger — ARQUIARTES Arquitetura &amp; Paisagismo" data-content-src="hero.photo" />
+          <img src="assets/img/laisa.jpg" alt="Laisa Wermelinger — ARQUIARTES Arquitetura &amp; Paisagismo" data-content-src="hero.photo" fetchpriority="high" decoding="async" />
           <span class="hero__photo-tag">
             <strong data-content="hero.name">Laisa Wermelinger</strong>
             <em data-content="hero.role">Arquitetura &amp; Paisagismo</em>
@@ -499,7 +523,7 @@
     <button class="lightbox__close" id="lightboxClose" type="button" aria-label="Fechar">&times;</button>
     <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" type="button" aria-label="Foto anterior">&#8249;</button>
     <figure class="lightbox__stage">
-      <img class="lightbox__img" id="lightboxImg" alt="" />
+      <img class="lightbox__img" id="lightboxImg" alt="" loading="lazy" decoding="async" />
       <figcaption class="lightbox__cap" id="lightboxCap"></figcaption>
     </figure>
     <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" type="button" aria-label="Próxima foto">&#8250;</button>
