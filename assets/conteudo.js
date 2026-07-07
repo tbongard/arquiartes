@@ -180,11 +180,6 @@ window.SITE_CONTENT = {
         "papel": "Residêncial"
       },
       {
-        "texto": "Profissionalismo do início ao fim. O paisagismo deu uma vida nova ao meu jardim.",
-        "nome": "Denise",
-        "papel": "Paisagismo"
-      },
-      {
         "texto": "Ficamos muito satisfeitos com o resultado do projeto. O loft ficou bonito, funcional e pensado para valorizar cada metro quadrado, tornando o imóvel muito mais atrativo para locação por temporada. O cuidado com os detalhes e a otimização dos espaços fizeram toda a diferença. Recomendo o trabalho da Arquiartes!",
         "nome": "Mariana e Marcelo",
         "papel": "Investidores"
@@ -244,27 +239,60 @@ window.SITE_CONTENT = {
     "eyebrow": "Como trabalhamos",
     "title": "Do primeiro contato ao seu espaço pronto.",
     "itens": [
-      { "titulo": "Primeiro contato", "texto": "Você conta sua ideia, necessidades e referências." },
-      { "titulo": "Visita & briefing", "texto": "Conhecemos o espaço e o seu estilo de vida." },
-      { "titulo": "Estudo & proposta", "texto": "Apresentamos o conceito e a proposta do projeto." },
-      { "titulo": "Projeto", "texto": "Desenvolvemos do partido ao detalhamento." },
-      { "titulo": "Acompanhamento", "texto": "Acompanhamos a execução até o resultado final." }
+      {
+        "titulo": "Primeiro contato",
+        "texto": "Você conta sua ideia, necessidades e referências."
+      },
+      {
+        "titulo": "Visita & briefing",
+        "texto": "Conhecemos o espaço e o seu estilo de vida."
+      },
+      {
+        "titulo": "Estudo & proposta",
+        "texto": "Apresentamos o conceito e a proposta do projeto."
+      },
+      {
+        "titulo": "Projeto",
+        "texto": "Desenvolvemos do partido ao detalhamento."
+      },
+      {
+        "titulo": "Acompanhamento",
+        "texto": "Acompanhamos a execução até o resultado final."
+      }
     ]
   },
   "faq": {
     "eyebrow": "Dúvidas comuns",
     "title": "Perguntas frequentes.",
     "itens": [
-      { "pergunta": "Vocês atendem projetos online (à distância)?", "resposta": "Sim! Além do atendimento presencial na região, desenvolvemos projetos online para todo o Brasil." },
-      { "pergunta": "Quanto tempo leva um projeto?", "resposta": "Depende do escopo e do tamanho do espaço. Na proposta você recebe um cronograma claro de cada etapa." },
-      { "pergunta": "Como funciona o orçamento?", "resposta": "O primeiro contato é sem compromisso. Depois de entender o seu projeto, enviamos uma proposta personalizada." },
-      { "pergunta": "Vocês acompanham a execução da obra?", "resposta": "Sim, oferecemos acompanhamento para garantir que o resultado saia fiel ao projeto." }
+      {
+        "pergunta": "Vocês atendem projetos online (à distância)?",
+        "resposta": "Sim! Além do atendimento presencial na região, desenvolvemos projetos online para todo o Brasil."
+      },
+      {
+        "pergunta": "Quanto tempo leva um projeto?",
+        "resposta": "Depende do escopo e do tamanho do espaço. Na proposta você recebe um cronograma claro de cada etapa."
+      },
+      {
+        "pergunta": "Como funciona o orçamento?",
+        "resposta": "O primeiro contato é sem compromisso. Depois de entender o seu projeto, enviamos uma proposta personalizada."
+      },
+      {
+        "pergunta": "Vocês acompanham a execução da obra?",
+        "resposta": "Sim, oferecemos acompanhamento para garantir que o resultado saia fiel ao projeto."
+      }
     ]
   },
   "transformacoes": {
     "eyebrow": "Transformações",
     "title": "Antes & depois: a mudança que se vê.",
-    "itens": []
+    "itens": [
+      {
+        "titulo": "",
+        "antes": "",
+        "depois": ""
+      }
+    ]
   },
   "footer": {
     "sobre": "Projetos autorais que unem arquitetura contemporânea, paisagismo e sofisticação atemporal."
