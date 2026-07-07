@@ -181,7 +181,7 @@ window.SITE_CONTENT = {
       },
       {
         "texto": "Ficamos muito satisfeitos com o resultado do projeto. O loft ficou bonito, funcional e pensado para valorizar cada metro quadrado, tornando o imóvel muito mais atrativo para locação por temporada. O cuidado com os detalhes e a otimização dos espaços fizeram toda a diferença. Recomendo o trabalho da Arquiartes!",
-        "nome": "Mariana e Marcelo",
+        "nome": "Marcelo e Mariana",
         "papel": "Investidores"
       },
       {
