@@ -102,6 +102,18 @@
           { k: 'galeria', l: 'Mais fotos do projeto (galeria)', t: 'galeria', full: true }
         ]}
     ]},
+    { id: 'transformacoes', label: 'Antes & Depois', hint: 'transformações', fields: [
+      { p: 'transformacoes.eyebrow', l: 'Selo', t: 'text' },
+      { p: 'transformacoes.title', l: 'Título', t: 'textarea' },
+      { p: 'transformacoes.itens', l: 'Comparações (antes / depois)', t: 'items', addable: true,
+        addLabel: '+ Adicionar antes & depois',
+        novo: { titulo: '', antes: '', depois: '' },
+        item: [
+          { k: 'titulo', l: 'Nome do projeto (opcional)', t: 'text', full: true },
+          { k: 'antes', l: 'Foto ANTES', t: 'image', aspect: 1.6 },
+          { k: 'depois', l: 'Foto DEPOIS', t: 'image', aspect: 1.6 }
+        ]}
+    ]},
     { id: 'diferenciais', label: 'Diferenciais', hint: 'e números', fields: [
       { p: 'diferenciais.eyebrow', l: 'Selo', t: 'text' },
       { p: 'diferenciais.title', l: 'Título', t: 'textarea' },

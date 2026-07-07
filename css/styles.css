@@ -482,6 +482,19 @@ p { color: #4f4a42; }
 }
 
 /* ============================================================
+   TRANSFORMAÇÕES (antes & depois)
+   ============================================================ */
+.transform[hidden] { display: none; }
+.transform__grid { display: grid; gap: clamp(1.6rem, 4vw, 2.6rem); grid-template-columns: 1fr; max-width: 840px; margin-inline: auto; }
+.transform__title { font-size: 1.15rem; margin-bottom: 0.8rem; text-align: center; }
+.ba { position: relative; width: 100%; aspect-ratio: 16 / 10; border-radius: var(--radius); overflow: hidden; user-select: none; touch-action: none; cursor: ew-resize; box-shadow: 0 26px 60px -30px rgba(0,0,0,0.45); }
+.ba-layer { position: absolute; inset: 0; background-size: cover; background-position: center; }
+.ba-div { position: absolute; top: 0; bottom: 0; width: 2px; background: #fff; left: 50%; box-shadow: 0 0 0 1px rgba(0,0,0,0.06); pointer-events: none; }
+.ba-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 44px; height: 44px; border-radius: 50%; background: #fff; box-shadow: 0 4px 14px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 1.15rem; }
+.ba-tag { position: absolute; bottom: 12px; z-index: 2; font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: #fff; background: rgba(31,46,38,0.72); padding: 0.3rem 0.7rem; border-radius: 20px; pointer-events: none; }
+.ba-tag.a { left: 12px; } .ba-tag.d { right: 12px; }
+
+/* ============================================================
    COMO FUNCIONA (etapas)
    ============================================================ */
 .como { background: var(--white); }

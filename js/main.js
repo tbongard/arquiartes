@@ -72,6 +72,7 @@
     renderComoFunciona(c);
     renderPortfolio(c);
     renderShowcase(c);
+    renderTransformacoes(c);
     renderDiferenciais(c);
     renderStats(c);
     renderDepoimentos(c);
@@ -322,6 +323,47 @@
       fig.appendChild(ph); fig.appendChild(cap);
       fig.addEventListener('click', function () { openLightbox(fotosDoProjeto(item), 0, item.titulo); });
       grid.appendChild(fig);
+    });
+  }
+
+  /* ---------- Transformações (comparador antes & depois) ---------- */
+  function renderTransformacoes(c) {
+    var sec = document.getElementById('transformacoes');
+    var grid = document.getElementById('transformGrid');
+    if (!sec || !grid) return;
+    var itens = (c && c.transformacoes && Array.isArray(c.transformacoes.itens)) ? c.transformacoes.itens : [];
+    var validos = itens.filter(function (it) { return it && it.antes && it.depois; });
+    if (validos.length === 0) { sec.hidden = true; return; }
+    sec.hidden = false;
+    grid.innerHTML = '';
+    validos.forEach(function (it) {
+      var card = document.createElement('div');
+      card.className = 'transform__item reveal';
+      if (it.titulo) {
+        var t = document.createElement('h3');
+        t.className = 'transform__title';
+        t.textContent = it.titulo;
+        card.appendChild(t);
+      }
+      var ba = document.createElement('div'); ba.className = 'ba';
+      var after = document.createElement('div'); after.className = 'ba-layer ba-after'; after.style.backgroundImage = 'url("' + it.depois + '")';
+      var before = document.createElement('div'); before.className = 'ba-layer ba-before'; before.style.backgroundImage = 'url("' + it.antes + '")';
+      var tagA = document.createElement('span'); tagA.className = 'ba-tag a'; tagA.textContent = 'Antes';
+      var tagD = document.createElement('span'); tagD.className = 'ba-tag d'; tagD.textContent = 'Depois';
+      var divi = document.createElement('div'); divi.className = 'ba-div';
+      var handle = document.createElement('div'); handle.className = 'ba-handle'; handle.innerHTML = '&#8646;';
+      divi.appendChild(handle);
+      ba.appendChild(after); ba.appendChild(before); ba.appendChild(tagA); ba.appendChild(tagD); ba.appendChild(divi);
+      card.appendChild(ba);
+      grid.appendChild(card);
+
+      var dragging = false;
+      function set(p) { p = Math.max(0, Math.min(100, p)); before.style.clipPath = 'inset(0 ' + (100 - p) + '% 0 0)'; divi.style.left = p + '%'; }
+      set(50);
+      function fromE(e) { var r = ba.getBoundingClientRect(); var x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left; set(x / r.width * 100); }
+      ba.addEventListener('pointerdown', function (e) { dragging = true; fromE(e); try { ba.setPointerCapture(e.pointerId); } catch (_) {} });
+      ba.addEventListener('pointermove', function (e) { if (dragging) fromE(e); });
+      ba.addEventListener('pointerup', function () { dragging = false; });
     });
   }
 
