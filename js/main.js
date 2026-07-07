@@ -69,11 +69,62 @@
     // Seções dinâmicas: reconstroem com a quantidade de itens existente
     renderServices(c);
     renderValores(c);
+    renderComoFunciona(c);
     renderPortfolio(c);
     renderShowcase(c);
     renderDiferenciais(c);
     renderStats(c);
     renderDepoimentos(c);
+    renderFaq(c);
+  }
+
+  /* ---------- Como funciona (etapas dinâmicas) ---------- */
+  function renderComoFunciona(c) {
+    if (!c || !c.comofunciona || !Array.isArray(c.comofunciona.itens)) return;
+    var grid = document.getElementById('comoGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    c.comofunciona.itens.forEach(function (item, i) {
+      var step = document.createElement('div');
+      step.className = 'como__step reveal';
+      var n = document.createElement('span');
+      n.className = 'como__num';
+      n.textContent = ('0' + (i + 1)).slice(-2);
+      var h = document.createElement('h3');
+      h.className = 'como__title';
+      h.textContent = item.titulo || '';
+      var p = document.createElement('p');
+      p.textContent = item.texto || '';
+      step.appendChild(n); step.appendChild(h); step.appendChild(p);
+      grid.appendChild(step);
+    });
+  }
+
+  /* ---------- FAQ (accordion dinâmico) ---------- */
+  function renderFaq(c) {
+    if (!c || !c.faq || !Array.isArray(c.faq.itens)) return;
+    var list = document.getElementById('faqList');
+    if (!list) return;
+    list.innerHTML = '';
+    c.faq.itens.forEach(function (item) {
+      var it = document.createElement('div');
+      it.className = 'faq__item';
+      var q = document.createElement('button');
+      q.className = 'faq__q';
+      q.type = 'button';
+      q.appendChild(document.createTextNode(item.pergunta || ''));
+      var ic = document.createElement('span');
+      ic.className = 'faq__ic';
+      ic.setAttribute('aria-hidden', 'true');
+      q.appendChild(ic);
+      var a = document.createElement('div');
+      a.className = 'faq__a';
+      var p = document.createElement('p');
+      p.textContent = item.resposta || '';
+      a.appendChild(p);
+      it.appendChild(q); it.appendChild(a);
+      list.appendChild(it);
+    });
   }
 
   /* ---------- Fotos de um projeto (capa + galeria) ---------- */
@@ -326,6 +377,16 @@
     }
   } catch (e) { /* ignora */ }
   applyContent(CONTENT);
+
+  /* ---------- Accordion do FAQ (delegação, uma vez) ---------- */
+  (function ligarFaq() {
+    var list = document.getElementById('faqList');
+    if (!list) return;
+    list.addEventListener('click', function (e) {
+      var q = e.target.closest ? e.target.closest('.faq__q') : null;
+      if (q && q.parentNode) q.parentNode.classList.toggle('open');
+    });
+  })();
 
   /* ---------- Controles do lightbox (uma vez) ---------- */
   (function ligarLightbox() {

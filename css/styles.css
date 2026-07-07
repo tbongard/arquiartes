@@ -482,6 +482,36 @@ p { color: #4f4a42; }
 }
 
 /* ============================================================
+   COMO FUNCIONA (etapas)
+   ============================================================ */
+.como { background: var(--white); }
+.como__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: clamp(1rem, 2.5vw, 1.8rem); }
+.como__step { padding-top: 1.4rem; border-top: 1px solid var(--gray-line); }
+.como__num { font-family: var(--font-serif); font-size: 1.7rem; color: var(--gold-soft); display: block; margin-bottom: 0.5rem; }
+.como__title { font-size: 1.05rem; margin-bottom: 0.45rem; }
+.como__step p { font-size: 0.9rem; }
+
+/* ============================================================
+   FAQ (accordion)
+   ============================================================ */
+.faq__list { max-width: 780px; margin-inline: auto; }
+.faq__item { border-bottom: 1px solid var(--gray-line); }
+.faq__q {
+  width: 100%; text-align: left; cursor: pointer; background: none; border: none;
+  display: flex; justify-content: space-between; align-items: center; gap: 1.2rem;
+  padding: 1.25rem 0; font-family: var(--font-sans); font-weight: 500; font-size: 1.02rem;
+  color: var(--green-deep); letter-spacing: 0.01em;
+}
+.faq__ic { position: relative; width: 16px; height: 16px; flex-shrink: 0; }
+.faq__ic::before, .faq__ic::after { content: ''; position: absolute; background: var(--gold); transition: opacity 0.3s var(--ease), transform 0.3s var(--ease); }
+.faq__ic::before { left: 0; top: 7px; width: 16px; height: 2px; }
+.faq__ic::after { left: 7px; top: 0; width: 2px; height: 16px; }
+.faq__item.open .faq__ic::after { opacity: 0; transform: rotate(90deg); }
+.faq__a { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease); }
+.faq__item.open .faq__a { max-height: 400px; }
+.faq__a p { padding: 0 0 1.3rem; color: #6a655c; font-size: 0.96rem; line-height: 1.65; max-width: 680px; }
+
+/* ============================================================
    SERVIÇOS
    ============================================================ */
 .servicos { background: var(--white); }

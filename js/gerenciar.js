@@ -77,6 +77,17 @@
           { k: 'descricao', l: 'Descrição', t: 'textarea', full: true }
         ]}
     ]},
+    { id: 'comofunciona', label: 'Como funciona', hint: 'etapas', fields: [
+      { p: 'comofunciona.eyebrow', l: 'Selo', t: 'text' },
+      { p: 'comofunciona.title', l: 'Título', t: 'textarea' },
+      { p: 'comofunciona.itens', l: 'Etapas', t: 'items', addable: true,
+        addLabel: '+ Adicionar etapa',
+        novo: { titulo: 'Nova etapa', texto: '' },
+        item: [
+          { k: 'titulo', l: 'Título', t: 'text' },
+          { k: 'texto', l: 'Descrição', t: 'textarea', full: true }
+        ]}
+    ]},
     { id: 'portfolio', label: 'Projetos', hint: 'portfólio', fields: [
       { p: 'portfolio.eyebrow', l: 'Selo', t: 'text' },
       { p: 'portfolio.title', l: 'Título', t: 'textarea' },
@@ -120,6 +131,17 @@
           { k: 'texto', l: 'Depoimento', t: 'textarea', full: true },
           { k: 'nome', l: 'Nome', t: 'text' },
           { k: 'papel', l: 'Descrição (ex.: cliente)', t: 'text' }
+        ]}
+    ]},
+    { id: 'faq', label: 'FAQ', hint: 'perguntas', fields: [
+      { p: 'faq.eyebrow', l: 'Selo', t: 'text' },
+      { p: 'faq.title', l: 'Título', t: 'textarea' },
+      { p: 'faq.itens', l: 'Perguntas e respostas', t: 'items', addable: true,
+        addLabel: '+ Adicionar pergunta',
+        novo: { pergunta: 'Nova pergunta?', resposta: '' },
+        item: [
+          { k: 'pergunta', l: 'Pergunta', t: 'text', full: true },
+          { k: 'resposta', l: 'Resposta', t: 'textarea', full: true }
         ]}
     ]},
     { id: 'contato', label: 'Contato', hint: 'e redes', fields: [
@@ -294,7 +316,21 @@
      4) ESTADO
      ============================================================ */
   var DEFAULTS = window.SITE_CONTENT ? clone(window.SITE_CONTENT) : {};
-  var content = carregarRascunho() || clone(DEFAULTS);
+  // Mescla o rascunho salvo sobre os padrões atuais, garantindo que seções
+  // novas (adicionadas depois) sempre apareçam mesmo em rascunhos antigos.
+  function mergeProfundo(base, over) {
+    if (!over || typeof over !== 'object') return base;
+    Object.keys(over).forEach(function (k) {
+      var b = base[k], o = over[k];
+      if (o && typeof o === 'object' && !Array.isArray(o) && b && typeof b === 'object' && !Array.isArray(b)) {
+        base[k] = mergeProfundo(b, o);
+      } else {
+        base[k] = o;
+      }
+    });
+    return base;
+  }
+  var content = mergeProfundo(clone(DEFAULTS), carregarRascunho());
   var sessao = null;
   var saveTimer;
 
