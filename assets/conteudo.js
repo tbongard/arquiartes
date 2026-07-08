@@ -300,7 +300,7 @@ window.SITE_CONTENT = {
       {
         "titulo": "Projeto Oásis",
         "antes": "assets/img/foto-1783516720983-881480.jpg",
-        "depois": "assets/img/foto-1783516721593-67418.jpg"
+        "depois": "assets/img/foto-1783517381119-172511.jpg"
       }
     ]
   },
