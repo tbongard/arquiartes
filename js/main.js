@@ -420,6 +420,19 @@
   } catch (e) { /* ignora */ }
   applyContent(CONTENT);
 
+  /* ---------- Métricas simples de acesso/engajamento (só em produção) ---------- */
+  function track(chave) {
+    if (location.hostname !== 'arquiartes.net.br') return; // não conta local/preview/github.io
+    try {
+      fetch('https://abacus.jasoncameron.dev/hit/arquiartes-net-br/' + chave, { mode: 'cors', keepalive: true }).catch(function () {});
+    } catch (e) {}
+  }
+  track('visitas');
+  document.addEventListener('click', function (e) {
+    var alvo = e.target && e.target.closest ? e.target.closest('[data-wa], .whatsapp-float') : null;
+    if (alvo) track('whatsapp');
+  });
+
   /* ---------- Accordion do FAQ (delegação, uma vez) ---------- */
   (function ligarFaq() {
     var list = document.getElementById('faqList');
@@ -556,6 +569,7 @@
         '*Mensagem:* ' + encodeURIComponent(mensagem);
 
       var url = 'https://wa.me/' + WHATSAPP_NUMERO + '?text=' + texto;
+      track('orcamento');
       window.open(url, '_blank', 'noopener');
 
       feedback.style.color = '';

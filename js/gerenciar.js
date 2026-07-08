@@ -169,6 +169,7 @@
       { p: 'contato.email', l: 'E-mail (opcional)', t: 'text' },
       { p: 'footer.sobre', l: 'Texto do rodapé', t: 'textarea' }
     ]},
+    { id: 'acessos', label: 'Acessos', hint: 'engajamento', fields: [] },
     { id: 'publicacao', label: 'Publicação', hint: 'colocar no ar', fields: [] },
     { id: 'avancado', label: 'Avançado', hint: 'admin', adminOnly: true, fields: [] }
   ];
@@ -554,6 +555,7 @@
 
     if (sec.adminOnly) { renderAvancado(area); return; }
     if (sec.id === 'publicacao') { renderPublicacao(area); return; }
+    if (sec.id === 'acessos') { renderAcessos(area); return; }
 
     area.appendChild(el('h2', { class: 'content__title', text: sec.label }));
     area.appendChild(el('p', { class: 'content__desc', text: 'Edite os textos e imagens desta seção. As alterações são salvas automaticamente como rascunho.' }));
@@ -756,6 +758,46 @@
   /* ============================================================
      8) SEÇÃO AVANÇADA (admin)
      ============================================================ */
+  /* Aba "Acessos": mostra acessos e engajamento do site */
+  function renderAcessos(area) {
+    area.appendChild(el('h2', { class: 'content__title', text: 'Acessos & Engajamento' }));
+    area.appendChild(el('p', { class: 'content__desc', text: 'Acompanhe quantas pessoas acessaram o site e interagiram. Os números atualizam ao abrir esta aba.' }));
+
+    var NS = 'arquiartes-net-br';
+    var metricas = [
+      { k: 'visitas', l: 'Acessos à página' },
+      { k: 'whatsapp', l: 'Cliques no WhatsApp' },
+      { k: 'orcamento', l: 'Pedidos de orçamento' }
+    ];
+    var grid = el('div', { class: 'acessos-grid' });
+    var nums = {};
+    metricas.forEach(function (m) {
+      var card = el('div', { class: 'acessos-card' });
+      var n = el('div', { class: 'acessos-num', text: '…' });
+      card.appendChild(n);
+      card.appendChild(el('div', { class: 'acessos-lbl', text: m.l }));
+      grid.appendChild(card);
+      nums[m.k] = n;
+    });
+    area.appendChild(grid);
+
+    var btn = el('button', { class: 'btn', type: 'button', text: 'Atualizar números' });
+    area.appendChild(btn);
+    area.appendChild(el('p', { class: 'hint', text: 'Contagem simples e gratuita (estimativa de acessos). Para relatórios completos — origem das visitas, dispositivos, cidades — dá para integrar o Google Analytics depois.' }));
+
+    function carregar() {
+      metricas.forEach(function (m) {
+        nums[m.k].textContent = '…';
+        fetch('https://abacus.jasoncameron.dev/get/' + NS + '/' + m.k)
+          .then(function (r) { return r.json(); })
+          .then(function (j) { nums[m.k].textContent = (j && typeof j.value === 'number') ? j.value.toLocaleString('pt-BR') : '0'; })
+          .catch(function () { nums[m.k].textContent = '—'; });
+      });
+    }
+    btn.addEventListener('click', carregar);
+    carregar();
+  }
+
   /* Aba "Publicação" (visível a todos): configura o GitHub */
   function renderPublicacao(area) {
     area.appendChild(el('h2', { class: 'content__title', text: 'Publicação' }));
