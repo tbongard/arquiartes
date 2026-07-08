@@ -298,9 +298,14 @@ window.SITE_CONTENT = {
         "depois": "assets/img/foto-1783514578967-21010.jpg"
       },
       {
-        "titulo": "Projeto Oásis",
+        "titulo": "Projeto Refúgio ",
         "antes": "assets/img/foto-1783516720983-881480.jpg",
         "depois": "assets/img/foto-1783517381119-172511.jpg"
+      },
+      {
+        "titulo": "Projeto Refúgio",
+        "antes": "assets/img/foto-1783518709555-232282.jpg",
+        "depois": "assets/img/foto-1783518710562-95348.jpg"
       }
     ]
   },
