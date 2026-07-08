@@ -758,41 +758,131 @@
   /* ============================================================
      8) SEÇÃO AVANÇADA (admin)
      ============================================================ */
-  /* Aba "Acessos": mostra acessos e engajamento do site */
+  /* Aba "Acessos": relatório de acessos e engajamento */
   function renderAcessos(area) {
     area.appendChild(el('h2', { class: 'content__title', text: 'Acessos & Engajamento' }));
-    area.appendChild(el('p', { class: 'content__desc', text: 'Acompanhe quantas pessoas acessaram o site e interagiram. Os números atualizam ao abrir esta aba.' }));
+    area.appendChild(el('p', { class: 'content__desc', text: 'Relatório do que acontece no site. Números atualizam ao abrir a aba ou clicar em "Atualizar".' }));
 
     var NS = 'arquiartes-net-br';
-    var metricas = [
+
+    // ---- Bloco 1: destaques ----
+    area.appendChild(el('h3', { class: 'ac-h', text: 'Visão geral' }));
+    var destaques = [
       { k: 'visitas', l: 'Acessos à página' },
+      { k: 'sessoes', l: 'Visitantes' },
       { k: 'whatsapp', l: 'Cliques no WhatsApp' },
       { k: 'orcamento', l: 'Pedidos de orçamento' }
     ];
-    var grid = el('div', { class: 'acessos-grid' });
+    var gridD = el('div', { class: 'acessos-grid' });
     var nums = {};
-    metricas.forEach(function (m) {
+    destaques.forEach(function (m) {
       var card = el('div', { class: 'acessos-card' });
       var n = el('div', { class: 'acessos-num', text: '…' });
       card.appendChild(n);
       card.appendChild(el('div', { class: 'acessos-lbl', text: m.l }));
-      grid.appendChild(card);
+      gridD.appendChild(card);
       nums[m.k] = n;
     });
-    area.appendChild(grid);
+    area.appendChild(gridD);
 
-    var btn = el('button', { class: 'btn', type: 'button', text: 'Atualizar números' });
+    // ---- Bloco 2: dispositivos ----
+    area.appendChild(el('h3', { class: 'ac-h', text: 'Dispositivos' }));
+    var gridDev = el('div', { class: 'acessos-grid ac-2' });
+    ['dispositivo-celular', 'dispositivo-desktop'].forEach(function (k) {
+      var card = el('div', { class: 'acessos-card' });
+      var n = el('div', { class: 'acessos-num', text: '…' });
+      card.appendChild(n);
+      card.appendChild(el('div', { class: 'acessos-lbl', text: k === 'dispositivo-celular' ? 'Celular' : 'Computador' }));
+      gridDev.appendChild(card);
+      nums[k] = n;
+    });
+    area.appendChild(gridDev);
+
+    // ---- Bloco 3: redes ----
+    area.appendChild(el('h3', { class: 'ac-h', text: 'Redes sociais' }));
+    var gridR = el('div', { class: 'acessos-grid ac-2' });
+    [{k:'instagram', l:'Cliques no Instagram'},{k:'threads', l:'Cliques no Threads'}].forEach(function (m) {
+      var card = el('div', { class: 'acessos-card' });
+      var n = el('div', { class: 'acessos-num', text: '…' });
+      card.appendChild(n);
+      card.appendChild(el('div', { class: 'acessos-lbl', text: m.l }));
+      gridR.appendChild(card);
+      nums[m.k] = n;
+    });
+    area.appendChild(gridR);
+
+    // ---- Bloco 4: seções mais vistas ----
+    area.appendChild(el('h3', { class: 'ac-h', text: 'Seções mais vistas' }));
+    var secs = [
+      { k: 'sec-sobre', l: 'Sobre' },
+      { k: 'sec-servicos', l: 'Serviços' },
+      { k: 'sec-projetos', l: 'Projetos' },
+      { k: 'sec-antesdepois', l: 'Antes & Depois' },
+      { k: 'sec-diferenciais', l: 'Diferenciais' },
+      { k: 'sec-depoimentos', l: 'Depoimentos' },
+      { k: 'sec-faq', l: 'FAQ' },
+      { k: 'sec-contato', l: 'Contato' }
+    ];
+    var lista = el('div', { class: 'ac-list' });
+    secs.forEach(function (m) {
+      var row = el('div', { class: 'ac-row' });
+      row.appendChild(el('div', { class: 'ac-name', text: m.l }));
+      var v = el('div', { class: 'ac-val', text: '…' });
+      row.appendChild(v);
+      lista.appendChild(row);
+      nums[m.k] = v;
+    });
+    area.appendChild(lista);
+
+    // ---- Bloco 5: projetos mais clicados ----
+    area.appendChild(el('h3', { class: 'ac-h', text: 'Projetos mais clicados' }));
+    var listaP = el('div', { class: 'ac-list', id: 'acessosProjetos' });
+    listaP.appendChild(el('p', { class: 'hint', text: 'Carregando…' }));
+    area.appendChild(listaP);
+
+    var btn = el('button', { class: 'btn', type: 'button', text: 'Atualizar' });
+    btn.style.marginTop = '1rem';
     area.appendChild(btn);
-    area.appendChild(el('p', { class: 'hint', text: 'Contagem simples e gratuita (estimativa de acessos). Para relatórios completos — origem das visitas, dispositivos, cidades — dá para integrar o Google Analytics depois.' }));
+    area.appendChild(el('p', { class: 'hint', text: 'Contagem sem cookies. Números começam do momento em que a medição foi ligada.' }));
+
+    function busca(k) {
+      return fetch('https://abacus.jasoncameron.dev/get/' + NS + '/' + k)
+        .then(function (r) { return r.ok ? r.json() : { value: 0 }; })
+        .catch(function () { return { value: null }; });
+    }
+    function fmt(v) { return (typeof v === 'number') ? v.toLocaleString('pt-BR') : '—'; }
 
     function carregar() {
-      metricas.forEach(function (m) {
-        nums[m.k].textContent = '…';
-        fetch('https://abacus.jasoncameron.dev/get/' + NS + '/' + m.k)
-          .then(function (r) { return r.json(); })
-          .then(function (j) { nums[m.k].textContent = (j && typeof j.value === 'number') ? j.value.toLocaleString('pt-BR') : '0'; })
-          .catch(function () { nums[m.k].textContent = '—'; });
+      Object.keys(nums).forEach(function (k) { nums[k].textContent = '…'; });
+      Object.keys(nums).forEach(function (k) { busca(k).then(function (j) { nums[k].textContent = fmt(j && j.value); }); });
+
+      // Projetos: pega os slugs a partir do conteúdo publicado
+      var projetos = (content && content.portfolio && Array.isArray(content.portfolio.itens)) ? content.portfolio.itens : [];
+      var lp = document.getElementById('acessosProjetos');
+      lp.innerHTML = '';
+      if (!projetos.length) { lp.appendChild(el('p', { class: 'hint', text: 'Nenhum projeto cadastrado ainda.' })); return; }
+      var slugs = projetos.map(function (p) {
+        var t = (p && p.titulo) ? p.titulo : '';
+        return {
+          titulo: t || '(sem título)',
+          slug: t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40)
+        };
       });
+      var rows = slugs.map(function (p) {
+        var row = el('div', { class: 'ac-row' });
+        row.appendChild(el('div', { class: 'ac-name', text: p.titulo }));
+        var v = el('div', { class: 'ac-val', text: '…' });
+        row.appendChild(v);
+        lp.appendChild(row);
+        return { p: p, v: v };
+      });
+      Promise.all(rows.map(function (r) { return busca('projeto-' + r.p.slug).then(function (j) { r.n = (j && j.value) || 0; return r; }); }))
+        .then(function (arr) {
+          arr.sort(function (a, b) { return b.n - a.n; }).forEach(function (r) {
+            r.v.textContent = fmt(r.n);
+            lp.appendChild(r.v.parentNode); // reordena
+          });
+        });
     }
     btn.addEventListener('click', carregar);
     carregar();

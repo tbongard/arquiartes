@@ -169,9 +169,16 @@ img { display: block; max-width: 100%; }
 .toast.err { background: var(--danger); }
 
 .acessos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 1.2rem; }
-.acessos-card { background: var(--white); border: 1px solid var(--gray-line); border-top: 2px solid var(--gold); border-radius: var(--radius); padding: 1.4rem 1.2rem; text-align: center; }
-.acessos-num { font-family: var(--font-serif); font-size: 2.4rem; color: var(--green-deep); line-height: 1; }
-.acessos-lbl { font-size: 0.78rem; letter-spacing: 0.06em; color: var(--gray-soft); margin-top: 0.5rem; text-transform: uppercase; }
+.acessos-grid.ac-2 { grid-template-columns: repeat(2, 1fr); max-width: 480px; }
+.acessos-card { background: var(--white); border: 1px solid var(--gray-line); border-top: 2px solid var(--gold); border-radius: var(--radius); padding: 1.2rem 1rem; text-align: center; }
+.acessos-num { font-family: var(--font-serif); font-size: 2rem; color: var(--green-deep); line-height: 1; }
+.acessos-lbl { font-size: 0.72rem; letter-spacing: 0.06em; color: var(--gray-soft); margin-top: 0.4rem; text-transform: uppercase; }
+.ac-h { font-family: var(--font-serif); font-size: 1rem; color: var(--green-deep); letter-spacing: 0.06em; margin: 1.6rem 0 0.7rem; }
+.ac-list { border: 1px solid var(--gray-line); border-radius: var(--radius); background: var(--white); overflow: hidden; margin-bottom: 0.6rem; }
+.ac-row { display: flex; justify-content: space-between; align-items: center; padding: 0.7rem 1rem; border-bottom: 1px solid var(--gray-line); }
+.ac-row:last-child { border-bottom: none; }
+.ac-name { font-size: 0.9rem; color: var(--ink); }
+.ac-val { font-family: var(--font-serif); font-size: 1.1rem; color: var(--gold); font-weight: 500; }
 
 .raw textarea { width: 100%; min-height: 320px; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.8rem; }
 

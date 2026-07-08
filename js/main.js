@@ -420,18 +420,57 @@
   } catch (e) { /* ignora */ }
   applyContent(CONTENT);
 
-  /* ---------- Métricas simples de acesso/engajamento (só em produção) ---------- */
+  /* ---------- Métricas de acesso e engajamento (só em produção) ---------- */
   function track(chave) {
-    if (location.hostname !== 'arquiartes.net.br') return; // não conta local/preview/github.io
+    if (location.hostname !== 'arquiartes.net.br') return;
     try {
       fetch('https://abacus.jasoncameron.dev/hit/arquiartes-net-br/' + chave, { mode: 'cors', keepalive: true }).catch(function () {});
     } catch (e) {}
   }
+  // Visita geral
   track('visitas');
+  // Dispositivo (celular ou desktop)
+  track(window.matchMedia('(max-width: 768px)').matches ? 'dispositivo-celular' : 'dispositivo-desktop');
+  // Sessão nova (não conta de novo se recarregar a página)
+  try {
+    if (!sessionStorage.getItem('_aa_sess')) {
+      sessionStorage.setItem('_aa_sess', '1');
+      track('sessoes');
+    }
+  } catch (e) {}
+
+  // Cliques rastreados
   document.addEventListener('click', function (e) {
-    var alvo = e.target && e.target.closest ? e.target.closest('[data-wa], .whatsapp-float') : null;
-    if (alvo) track('whatsapp');
+    var t = e.target; if (!t || !t.closest) return;
+    if (t.closest('[data-wa], .whatsapp-float')) track('whatsapp');
+    if (t.closest('a[href*="instagram.com"]')) track('instagram');
+    if (t.closest('a[href*="threads.com"]'))  track('threads');
+    var proj = t.closest('#portfolioGrid .project, #showcaseTrack .showcase__slide');
+    if (proj) {
+      var titEl = proj.querySelector('.project__title, .showcase__title');
+      if (titEl && titEl.textContent) {
+        var slug = titEl.textContent.trim().toLowerCase()
+          .normalize('NFD').replace(/[̀-ͯ]/g, '')
+          .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40);
+        if (slug) track('projeto-' + slug);
+        track('projetos-clicados');
+      }
+    }
   });
+
+  // Seções vistas (só a primeira vez que aparecem na tela nesta sessão)
+  if ('IntersectionObserver' in window) {
+    var vistas = {};
+    var mapa = { sobre:'sec-sobre', servicos:'sec-servicos', portfolio:'sec-projetos', transformacoes:'sec-antesdepois', diferenciais:'sec-diferenciais', depoimentos:'sec-depoimentos', faq:'sec-faq', contato:'sec-contato' };
+    var vo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var id = en.target.id, k = mapa[id];
+        if (k && !vistas[k]) { vistas[k] = 1; track(k); }
+      });
+    }, { threshold: 0.35 });
+    Object.keys(mapa).forEach(function (id) { var el = document.getElementById(id); if (el) vo.observe(el); });
+  }
 
   /* ---------- Accordion do FAQ (delegação, uma vez) ---------- */
   (function ligarFaq() {
