@@ -288,9 +288,14 @@ window.SITE_CONTENT = {
     "title": "Antes & depois: a mudança que se vê.",
     "itens": [
       {
-        "titulo": "",
-        "antes": "",
-        "depois": ""
+        "titulo": "Quarto Essência",
+        "antes": "assets/img/foto-1783514576830-731895.jpg",
+        "depois": "assets/img/foto-1783514577399-769034.jpg"
+      },
+      {
+        "titulo": "Suíte âmbar",
+        "antes": "assets/img/foto-1783514578034-87247.jpg",
+        "depois": "assets/img/foto-1783514578967-21010.jpg"
       }
     ]
   },
