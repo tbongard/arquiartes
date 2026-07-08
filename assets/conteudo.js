@@ -306,6 +306,11 @@ window.SITE_CONTENT = {
         "titulo": "Projeto Refúgio",
         "antes": "assets/img/foto-1783518709555-232282.jpg",
         "depois": "assets/img/foto-1783518710562-95348.jpg"
+      },
+      {
+        "titulo": "Cozinha Afetiva | Renovação",
+        "antes": "assets/img/foto-1783519789442-990455.jpg",
+        "depois": "assets/img/foto-1783519790475-803300.jpg"
       }
     ]
   },
